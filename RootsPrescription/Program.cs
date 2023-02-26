@@ -9,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IFileStorageService, FileStorageService>();
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
@@ -23,6 +24,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.MapHealthChecks("/healthz");
 app.MapControllers();
 
 app.Run();
