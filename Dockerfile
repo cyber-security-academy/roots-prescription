@@ -7,7 +7,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["RootsPrescription/RootsPrescription.csproj", "RootsPrescription/"]
+COPY RootsPrescription/RootsPrescription.csproj RootsPrescription/
 RUN dotnet restore "RootsPrescription/RootsPrescription.csproj"
 COPY . .
 WORKDIR "/src/RootsPrescription"
