@@ -70,7 +70,7 @@ app.Logger.LogInformation($"Hello world, {group} connected!");
 app.UseSwagger();
 app.UseSwaggerUI(options => options.EnableTryItOutByDefault());
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
