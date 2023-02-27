@@ -7,6 +7,10 @@ on:
       - 'add-deploy-workflow'  # just for testing the workflow works. Remove before merge.
   workflow_dispatch:  # To enable manual run of workflow
 
+permissions:
+  contents: read
+  id-token: write
+
 # CONFIGURATION
 # For help, go to https://github.com/Azure/Actions
 #
@@ -15,31 +19,36 @@ on:
 # 2. Change these variables for your configuration:
 env:
   GROUP: 0
-  AZURE_WEBAPP_NAME: 'csa-gr${{ env.GROUP }}-app'  # set this to your application's name
+  AZURE_WEBAPP_NAME: 'csa-gr$GROUP-app'  # set this to your application's name
   CONTAINER_REGISTRY: ${{ vars.REGISTRY_URL }}  # set repo variable with Container Registry URL, example : xyz.azurecr.io 
-  IMAGE_NAME: ${{ env.CONTAINER_REGISTRY }}/csa-roots${{ env.GROUP }}
-  IMAGE_AND_TAG: ${{ env.IMAGE_NAME }}:${{ github.sha }}
+  IMAGE_NAME: '$CONTAINER_REGISTRY/csa-roots$GROUP'
+  IMAGE_AND_TAG: '$IMAGE_NAME:${{ github.sha }}'
   
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
     - name: Azure authentication
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        client-id: ${{ vars.AZURE_CLIENT_ID }}
+        tenant-id: ${{ vars.AZURE_TENANT_ID }}
+        subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
     - name: ACR authentication
-      uses: azure/docker-login@v1
-      with:
-        login-server: ${{ env.CONTAINER_REGISTRY }}
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}    
+      shell: bash
+      run: |
+        TOKEN=$(az acr login --name $CONTAINER_REGISTRY --expose-token --output tsv --query accessToken --only-show-errors)
+        docker login $CONTAINER_REGISTRY --username ${{ vars.AZURE_CLIENT_ID }} --password $TOKEN
+
     - name: Docker Build & Push to ACR
       run: |
-        docker build . -t ${{ env.IMAGE_AND_TAG }}
-        docker push ${{ env.IMAGE_AND_TAG }} 
-        echo '🚀 Pushed image to ACR: ${{ env.IMAGE_AND_TAG }}' >> $GITHUB_SUMMARY_STEP
+        docker build . -t $IMAGE_AND_TAG
+        docker push $IMAGE_AND_TAG
+        echo '🚀 Pushed image to ACR: $IMAGE_AND_TAG' >> $GITHUB_SUMMARY_STEP
 # Uncomment the below action snippet if the Web app credentials are not updated as web app settings
 #     - name: Set Web App ACR authentication
 #       uses: Azure/appservice-settings@v1
