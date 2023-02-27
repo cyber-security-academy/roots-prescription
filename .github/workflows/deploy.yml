@@ -18,16 +18,18 @@ permissions:
 #   AZURE_CREDENTIALS, REGISTRY_USERNAME, REGISTRY_PASSWORD, REGISTRY_URL
 # 2. Change these variables for your configuration:
 env:
-  GROUP: 0
-  AZURE_WEBAPP_NAME: 'csa-gr$GROUP-app'  # set this to your application's name
-  CONTAINER_REGISTRY: ${{ vars.REGISTRY_URL }}  # set repo variable with Container Registry URL, example : xyz.azurecr.io 
-  IMAGE_NAME: '$CONTAINER_REGISTRY/csa-roots$GROUP'
-  IMAGE_AND_TAG: '$IMAGE_NAME:${{ github.sha }}'
+  AZURE_WEBAPP_NAME: csa-gr0-app  # set this to your application's name
+  CONTAINER_REGISTRY: ${{ vars.REGISTRY_URL }}  # set repo variable with Container Registry URL, example : xyz.azurecr.io
+  IMAGE_NAME: '${{ vars.REGISTRY_URL }}/csa-roots-0'
+  IMAGE_AND_TAG: '${{ vars.REGISTRY_URL }}/csa-roots-0:${{ github.sha }}'
   
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
+    - name: check envs
+      run: env
+
     - name: Checkout repository
       uses: actions/checkout@v3
 
@@ -42,13 +44,13 @@ jobs:
       shell: bash
       run: |
         TOKEN=$(az acr login --name $CONTAINER_REGISTRY --expose-token --output tsv --query accessToken --only-show-errors)
-        docker login $CONTAINER_REGISTRY --username ${{ vars.AZURE_CLIENT_ID }} --password $TOKEN
+        docker login $CONTAINER_REGISTRY --username 00000000-0000-0000-0000-000000000000 --password $TOKEN
 
     - name: Docker Build & Push to ACR
       run: |
         docker build . -t $IMAGE_AND_TAG
         docker push $IMAGE_AND_TAG
-        echo '🚀 Pushed image to ACR: $IMAGE_AND_TAG' >> $GITHUB_SUMMARY_STEP
+        echo "🚀 Pushed image to ACR: $IMAGE_AND_TAG" >> $GITHUB_STEP_SUMMARY
 # Uncomment the below action snippet if the Web app credentials are not updated as web app settings
 #     - name: Set Web App ACR authentication
 #       uses: Azure/appservice-settings@v1
