@@ -1,5 +1,8 @@
-﻿namespace RootsPrescriptionWin.FileStorage;
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace RootsPrescriptionWin.FileStorage;
 public interface IFileStorageService
 {
-    string GetFile(string id);
+    FileStream? GetFile(int id);
+    FileStream? GetFile(string filepath);
 }
