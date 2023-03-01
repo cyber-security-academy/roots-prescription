@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace RootsPrescriptionWin.FileStorage;
+namespace RootsPrescription.FileStorage;
 public class FileStorageService : IFileStorageService
 {
     private readonly ILogger<FileStorageService> _logger;

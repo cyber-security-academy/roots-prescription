@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RootsPrescriptionWin.FileStorage;
+using RootsPrescription.FileStorage;
 
-namespace RootsPrescriptionWin.Controllers;
+namespace RootsPrescription.Controllers;
 
 
 [Route("api/[controller]/[action]")]
