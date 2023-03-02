@@ -1,0 +1,54 @@
+[
+    {
+        "Id": 813,
+        "UserName": "bob",
+        "Name": "Bob Beach",
+        "NationalIdNumber": "01127411111",
+        "PostalAddress": "6 Beach Rd",
+        "Invoices": [
+            {
+                "Id": 12,
+                "InvoiceNo": 1003,
+                "InvoiceDate": "2023-04-17",
+                "DueDate": "2023-05-16"
+            }
+        ],
+        "Prescriptions": [
+            {
+                "Id": 91,
+                "DocNo": 9001,
+                "PrescriptionDate": "2023-04-17",
+                "Medication": "Idorium"
+            }
+        ]
+    },
+    {
+        "Id": 208,
+        "UserName": "cindy",
+        "Name": "Cindy Crawl",
+        "NationalIdNumber": "31118822222",
+        "PostalAddress": "142 Cresent Rd",
+        "Invoices": [
+            {
+                "Id": 13,
+                "InvoiceNo": 1004,
+                "InvoiceDate": "2023-04-21",
+                "DueDate": "2023-05-20"
+            }
+        ],
+        "Prescriptions": [
+            {
+                "Id": 92,
+                "DocNo": 9002,
+                "PrescriptionDate": "2023-05-17",
+                "Medication": "Accessifix"
+            },
+            {
+                "Id": 93,
+                "DocNo": 9003,
+                "PrescriptionDate": "2023-05-17",
+                "Medication": "Cryptimol"
+            }
+        ]
+    }
+]

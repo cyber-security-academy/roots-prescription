@@ -13,7 +13,7 @@ public class FileStorageService : IFileStorageService
 
     public FileStream? GetFile(int id)
     {
-        // TODO: Look up filename for the goven id
+        // TODO: Look up filename for the given id
         string filename = "Prescription.pdf";
         return GetFile(filename);
     }
@@ -24,7 +24,7 @@ public class FileStorageService : IFileStorageService
         if (File.Exists(filepath))
         {
             _logger.LogInformation($"Downloading file: {filepath}");
-            return System.IO.File.OpenRead(filepath);  // Use System.IO to avoid confusion
+            return System.IO.File.OpenRead(filepath);  // Use System.IO to avoid naming confusion
         } else
         {
             _logger.LogWarning($"Cannot find file file: {filepath}");

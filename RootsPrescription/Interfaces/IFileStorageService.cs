@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace RootsPrescriptionWin.FileStorage;
+namespace RootsPrescription.FileStorage;
 public interface IFileStorageService
 {
     FileStream? GetFile(int id);
