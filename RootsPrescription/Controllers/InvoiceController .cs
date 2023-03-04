@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using RootsPrescription.Database;
 using RootsPrescription.FileStorage;
 using RootsPrescription.Models;
+using System.Security.Claims;
 
 namespace RootsPrescription.Controllers;
+
 
 
 [Route("api/[controller]/[action]")]
@@ -24,13 +27,14 @@ public class InvoiceController : ControllerBase
     }
 
 
-
+    [Authorize]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetMyInvoices()
     {
-        UserDTO authuser = _dbservice.GetUserById(DBG_LoggedinUserId);
+        string authusername = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        UserDTO authuser = _dbservice.GetUserByUsername(authusername);
         InvoiceDTO[] invoices = _dbservice.GetUserInvoices(DBG_LoggedinUserId);
 
         if (invoices == null)
@@ -49,9 +53,9 @@ public class InvoiceController : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetInvoice(string filename)
+    public async Task<IActionResult> GetInvoicePDF(string filename)
     {
-        UserDTO authuser = _dbservice.GetUserById(DBG_LoggedinUserId);
+        // Check if Invoice exists
         FileStream stream = _filestorage.GetFile(filename);
         if (stream == null)
         {
@@ -60,9 +64,9 @@ public class InvoiceController : ControllerBase
         else
         {
             string attachmentname = Path.GetFileName(stream.Name);
+            _logger.LogInformation($"Download invoice: " + attachmentname);
 
-            _logger.LogInformation($"User {authuser.NationalIdNumber} requested invoice: " + attachmentname);
-
+            // Respond to client
             Response.Headers.Add("Content-Disposition", $"inline; filename=\"{attachmentname}\"");
             Response.Headers.Add("X-Content-Type-Options", "nosniff");
             return new FileStreamResult(stream, "application/pdf");
