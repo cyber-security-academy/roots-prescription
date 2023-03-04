@@ -8,7 +8,6 @@ using System.Security.Claims;
 namespace RootsPrescription.Controllers;
 
 
-
 [Route("api/[controller]/[action]")]
 [ApiController]
 public class InvoiceController : ControllerBase

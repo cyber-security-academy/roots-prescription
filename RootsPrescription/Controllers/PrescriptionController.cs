@@ -83,7 +83,7 @@ public class PrescriptionController : ControllerBase
         }
         else
         {
-            _logger.LogInformation($"User {authusername} downloaded {stream.Name}")
+            _logger.LogInformation($"User {authusername} downloaded {stream.Name}");
             string attachmentname = Path.GetFileName(stream.Name);
             Response.Headers.Add("Content-Disposition", $"inline; filename=\"{attachmentname}\"");
             Response.Headers.Add("X-Content-Type-Options", "nosniff");

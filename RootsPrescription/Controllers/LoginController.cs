@@ -33,11 +33,11 @@ public class LoginController : ControllerBase
     [AllowAnonymous]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Login(string username, string password)
     {
         UserDTO user = Authenticate(username, password);
-        if (user == null) return Forbid("Username or password is incorrect");
+        if (user == null) return Unauthorized("Username or password is incorrect");
 
         string token = GenerateToken(user);
         return Ok(token);        
