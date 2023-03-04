@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="FileArchive\NewFolder\" />
+    <Folder Include="FileArchive\" />
   </ItemGroup>
 
 </Project>
