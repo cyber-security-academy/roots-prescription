@@ -42,7 +42,7 @@ public class PrescriptionController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetMyPrescriptions()
     {
-        // Find perscritions for the authenticated User
+        // Find perscritions for the authenticated `User`
         string authusername = User.FindFirstValue(ClaimTypes.NameIdentifier);
         UserDTO authuser = _dbservice.GetUserByUsername(authusername);
         PrescriptionDTO[] prescriptions = _dbservice.GetUserPrescriptions(authuser.Id);
@@ -54,7 +54,7 @@ public class PrescriptionController : ControllerBase
         }
         else
         {
-            _logger.LogInformation($"User {DBG_LoggedinUserId} retrieved {prescriptions.Length} prescriptions");
+            _logger.LogInformation($"User {authusername} retrieved {prescriptions.Length} prescriptions");
             return Ok(prescriptions);
         }
     }
@@ -65,7 +65,7 @@ public class PrescriptionController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetPDF(int id)
     {
-        // Look up username for the authenticated USer
+        // Look up username for the authenticated `User`
         string authusername = User.FindFirstValue(ClaimTypes.NameIdentifier);
         UserDTO authuser = _dbservice.GetUserByUsername(authusername);
 
