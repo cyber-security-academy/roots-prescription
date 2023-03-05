@@ -12,8 +12,6 @@ namespace RootsPrescription.Controllers;
 [ApiController]
 public class InvoiceController : ControllerBase
 {
-    private readonly int DBG_LoggedinUserId = 208;  // TODO: Remove me, when Authentication is in place
-
     private readonly ILogger<PrescriptionController> _logger;
     private readonly IFileStorageService _filestorage;
     private readonly IDatabaseService _dbservice;
@@ -34,7 +32,7 @@ public class InvoiceController : ControllerBase
     {
         string authusername = User.FindFirstValue(ClaimTypes.NameIdentifier);
         UserDTO authuser = _dbservice.GetUserByUsername(authusername);
-        InvoiceDTO[] invoices = _dbservice.GetUserInvoices(DBG_LoggedinUserId);
+        InvoiceDTO[] invoices = _dbservice.GetUserInvoices(authuser.Id);
 
         if (invoices == null)
         {
@@ -42,7 +40,8 @@ public class InvoiceController : ControllerBase
         }
         else
         {
-            _logger.LogInformation($"User {authuser.NationalIdNumber} retrieved {invoices.Length} invoices");
+            _logger.LogInformation($"User {authuser.NationalIdNumber} {authuser.UserName} retrieved {invoices.Length} invoices");
+
             return Ok(invoices);
         }
     }
