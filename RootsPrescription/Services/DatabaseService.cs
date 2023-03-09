@@ -11,7 +11,7 @@ namespace RootsPrescription.Database;
 public class DatabaseService : IDatabaseService
 {
     private readonly ILogger<DatabaseService> _logger;
-    private static UserDTO[] _data;
+    private static UserDTO[] _data = null;
     private static Dictionary<int,UserDTO> _userIds;
     private static Dictionary<string,UserDTO> _userNames;
     private static Dictionary<string,UserDTO> _userNatIds;
@@ -22,12 +22,6 @@ public class DatabaseService : IDatabaseService
     public DatabaseService(ILogger<DatabaseService> logger)
     {
         _logger = logger;
-        _data = null;
-        _prescriptions = new();
-        _invoices = new();
-        _userIds = new();
-        _userNames = new();
-        _userNatIds = new();
 
         LoadJsonToLookupTables(@"Data/user-info.json");
     }
@@ -37,6 +31,13 @@ public class DatabaseService : IDatabaseService
         if (_data == null)
         {
             _logger.LogInformation($"Loading JSON database '{filename}'");
+            _userIds = new();
+            _userNames = new();
+            _userNatIds = new();
+            _prescriptions = new();
+            _invoices = new();
+
+
             using (FileStream file = File.OpenRead(filename))
             {
                 _data = JsonSerializer.Deserialize<UserDTO[]>(file);
