@@ -78,13 +78,13 @@ public class PrescriptionController : ControllerBase
         // Respond
         if (stream == null)
         {
-            _logger.LogWarning($"The perscription #{id} ({prescription.Filename}) was not found in the file archive");
+            _logger.LogWarning($"The prescription #{id} ({prescription.Filename}) was not found in the file archive");
             return NotFound();
         }
         else
         {
-            _logger.LogInformation($"User {authusername} downloaded {stream.Name}");
             string attachmentname = Path.GetFileName(stream.Name);
+            _logger.LogInformation($"Downloaded {attachmentname}");
             Response.Headers.Add("Content-Disposition", $"inline; filename=\"{attachmentname}\"");
             Response.Headers.Add("X-Content-Type-Options", "nosniff");
             return new FileStreamResult(stream, "application/pdf");
