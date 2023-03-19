@@ -2,9 +2,11 @@ using RootsPrescription.Database;
 using RootsPrescription.FileStorage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
+using System.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Splunk.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,14 +56,14 @@ var app = builder.Build();
 
 // Splunk logging - HTTP Event Collector
 // https://dev.splunk.com/enterprise/docs/devtools/csharp/logging-dotnet
-var traceSource = new TraceSource("SplunkLogger");
-traceSource.Switch.Level = SourceLevels.All;
-traceSource.Listeners.Clear();
-traceSource.Listeners.Add(new HttpEventCollectorTraceListener(
+var trace = new TraceSource("RootsPrescription");
+trace.Switch.Level = SourceLevels.All;
+trace.Listeners.Clear();
+trace.Listeners.Add(new HttpEventCollectorTraceListener(
     uri: new Uri("https://log.splunk.csa.datasnok.no"),  // must be ENV var
-    token: "f727aec9-cd4c-4238-a76e-a4367ecf7ead");  // must be ENV var
-// Add app id env var?
-traceSource.TraceEvent(TraceEventType.Information, "Hello world, API 0 connected!");  
+    token: "ab98f781-16d4-43f4-a098-611cfb20db3f"));  // must be ENV var
+// Add app ID env var instead of "API 0"?
+trace.TraceEvent(TraceEventType.Information, 0, "Hello world, API 0 connected!");  
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
