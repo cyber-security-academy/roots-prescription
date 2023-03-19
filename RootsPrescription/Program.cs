@@ -52,6 +52,17 @@ builder.Services.AddAuthorization(options =>
 
 var app = builder.Build();
 
+// Splunk logging - HTTP Event Collector
+// https://dev.splunk.com/enterprise/docs/devtools/csharp/logging-dotnet
+var traceSource = new TraceSource("SplunkLogger");
+traceSource.Switch.Level = SourceLevels.All;
+traceSource.Listeners.Clear();
+traceSource.Listeners.Add(new HttpEventCollectorTraceListener(
+    uri: new Uri("https://log.splunk.csa.datasnok.no"),  // must be ENV var
+    token: "f727aec9-cd4c-4238-a76e-a4367ecf7ead");  // must be ENV var
+// Add app id env var?
+traceSource.TraceEvent(TraceEventType.Information, "Hello world, API 0 connected!");  
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
