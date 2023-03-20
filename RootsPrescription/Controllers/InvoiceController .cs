@@ -17,20 +17,12 @@ public class InvoiceController : ControllerBase
     private readonly ILogger<InvoiceController> _logger;
     private readonly IFileStorageService _filestorage;
     private readonly IDatabaseService _dbservice;
-    private static TraceSource trace;
 
     public InvoiceController(ILogger<InvoiceController> logger, IFileStorageService filestorage, IDatabaseService dbservice)
     {
         _logger = logger;
         _filestorage = filestorage;
         _dbservice = dbservice;
-
-        trace = new TraceSource("RootsPrescription");
-        trace.Switch.Level = SourceLevels.All;
-        trace.Listeners.Clear();
-        trace.Listeners.Add(new HttpEventCollectorTraceListener(
-            uri: new Uri("https://log.splunk.csa.datasnok.no"),  // must be ENV var
-            token: "ab98f781-16d4-43f4-a098-611cfb20db3f"));  // must be ENV var
     }
 
 
@@ -52,7 +44,6 @@ public class InvoiceController : ControllerBase
         {
 			string logMsg = $"User {authuser.NationalIdNumber} {authuser.UserName} retrieved {invoices.Length} invoices";
             _logger.LogInformation(logMsg);
-			trace.TraceEvent(TraceEventType.Information, 0, logMsg);
 
             return Ok(invoices);
         }
@@ -76,7 +67,6 @@ public class InvoiceController : ControllerBase
             string attachmentname = Path.GetFileName(stream.Name);
 			string logMsg = $"Downloaded: {attachmentname}";
             _logger.LogInformation(logMsg);
-			trace.TraceEvent(TraceEventType.Information, 1, logMsg);
 
             // Respond to client
             Response.Headers.Add("Content-Disposition", $"inline; filename=\"{attachmentname}\"");

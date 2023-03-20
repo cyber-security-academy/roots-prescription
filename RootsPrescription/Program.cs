@@ -7,6 +7,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Splunk.Logging;
+using Serilog;
+using Serilog.Expressions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,18 +54,21 @@ builder.Services.AddAuthorization(options =>
 
 
 
-var app = builder.Build();
+Log.Logger = new LoggerConfiguration()
+    .CreateLogger();
 
 // Splunk logging - HTTP Event Collector
 // https://dev.splunk.com/enterprise/docs/devtools/csharp/logging-dotnet
-var trace = new TraceSource("RootsPrescription");
-trace.Switch.Level = SourceLevels.All;
-trace.Listeners.Clear();
-trace.Listeners.Add(new HttpEventCollectorTraceListener(
-    uri: new Uri("https://log.splunk.csa.datasnok.no"),  // must be ENV var
-    token: "ab98f781-16d4-43f4-a098-611cfb20db3f"));  // must be ENV var
-// Add app ID env var instead of "API 0"?
-trace.TraceEvent(TraceEventType.Information, 0, "Hello world, API 0 connected!");  
+// See configuration in appsettings.json
+builder.Host.UseSerilog((context, services, configuration) => configuration
+    .ReadFrom.Configuration(context.Configuration)
+    .WriteTo.Console()
+);
+
+var app = builder.Build();
+
+string group = builder.Configuration["GroupName"];
+app.Logger.LogInformation($"Hello world, {group} connected!");  
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
