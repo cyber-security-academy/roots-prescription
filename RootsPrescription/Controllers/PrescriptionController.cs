@@ -13,7 +13,7 @@ namespace RootsPrescription.Controllers;
 [ApiController]
 public class PrescriptionController : ControllerBase
 {
-    private readonly int DBG_LoggedinUserId = 813; // TODO: Remove me, when Authentication is in place
+
     private readonly ILogger<PrescriptionController> _logger;
     private readonly IFileStorageService _filestorage;
     private readonly IDatabaseService _dbservice;
@@ -25,18 +25,7 @@ public class PrescriptionController : ControllerBase
         _dbservice = dbservice;
     }
 
-    [AllowAnonymous]
-    [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public ActionResult<string> Ping()
-    {
-        const string message = "--CHANGE ME--";
-
-        //_logger.Information(helloWorld);
-        return message;
-    }
-
-
+    
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
