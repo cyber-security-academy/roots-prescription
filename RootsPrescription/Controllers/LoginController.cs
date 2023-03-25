@@ -8,6 +8,8 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using SimpleHashing.Net;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 
 namespace RootsPrescription.Controllers;
 
@@ -36,11 +38,39 @@ public class LoginController : ControllerBase
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> Login(string username, string password)
     {
-        UserDTO user = Authenticate(username, password);
+        UserDTO? user = Authenticate(username, password);
         if (user == null) return Unauthorized("Username or password is incorrect");
 
-        string token = GenerateToken(user);
+        int expiryMinutes = 60;
+        List<Claim> claims = GenerateClaims(user);
+
+        // Cookie authentication
+        await SetAuthenticationCookie(claims, expiryMinutes);
+
+        // JWT bearar token authentication
+        string token = GenerateToken(claims, expiryMinutes);
+
         return Ok(token);        
+    }
+
+
+    private async Task SetAuthenticationCookie(List<Claim> claims, int expiryMinutes)
+    {
+        var claimsIdentity = new ClaimsIdentity(
+            claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+        var authProperties = new AuthenticationProperties
+        {
+            ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(expiryMinutes),
+            IsPersistent = true,
+            IssuedUtc = DateTimeOffset.UtcNow,
+        };
+
+        await HttpContext.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties);
+
     }
 
 
@@ -61,23 +91,27 @@ public class LoginController : ControllerBase
         }
     }
 
-    private string GenerateToken(UserDTO user)
+    private List<Claim> GenerateClaims(UserDTO user)
+    {
+        List<Claim> claims = new()
+        {
+            new Claim(ClaimTypes.NameIdentifier, user.UserName),
+            new Claim("FullName", user.Name),
+            new Claim(ClaimTypes.Name, user.Name)
+        };
+        return claims;
+    }
+
+    private string GenerateToken(List<Claim> claims, int expiryMinutes)
     {
 
         var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:SecretKey"]));
         var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-        var claims = new[]
-        {
-                new Claim("upn", user.UserName),
-                new Claim(ClaimTypes.Upn, user.UserName),
-                new Claim(ClaimTypes.NameIdentifier, user.UserName),
-                new Claim(ClaimTypes.Name, user.Name)
-        };
         var token = new JwtSecurityToken(
             _config["Jwt:Issuer"],
             _config["Jwt:Audience"],
             claims,
-            expires: DateTime.Now.AddMinutes(60),
+            expires: DateTime.Now.AddMinutes(expiryMinutes),
             signingCredentials: credentials);
 
 
