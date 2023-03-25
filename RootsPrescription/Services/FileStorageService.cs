@@ -21,7 +21,7 @@ public class FileStorageService : IFileStorageService
     public FileStream? GetFile(string filename)
     {
         string filepath= Path.Combine(_filearchivepath, filename);
-        if (File.Exists(filepath) || Directory.Exists(filename))
+        if (File.Exists(filepath) || Directory.Exists(filepath))
         {
             _logger.LogInformation($"Downloading file: {filepath}");
             return System.IO.File.OpenRead(filepath);  // Use System.IO to avoid naming confusion
