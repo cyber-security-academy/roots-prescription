@@ -69,12 +69,8 @@ var app = builder.Build();
 string group = builder.Configuration["GroupName"];
 app.Logger.LogInformation($"Hello world, {group} connected!");  
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(options => options.EnableTryItOutByDefault());
-}
+app.UseSwagger();
+app.UseSwaggerUI(options => options.EnableTryItOutByDefault());
 
 app.UseHttpsRedirection();
 
