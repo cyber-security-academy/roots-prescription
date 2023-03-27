@@ -62,7 +62,6 @@ Log.Logger = new LoggerConfiguration()
 // See configuration in appsettings.json
 builder.Host.UseSerilog((context, services, configuration) => configuration
     .ReadFrom.Configuration(context.Configuration)
-    .WriteTo.Console()
 );
 
 var app = builder.Build();
