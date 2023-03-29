@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RootsPrescription.Models;
+using System.Security.Cryptography;
 using System.Text.Json;
 
 /// <summary>
@@ -11,6 +12,7 @@ namespace RootsPrescription.Database;
 public class DatabaseService : IDatabaseService
 {
     private readonly ILogger<DatabaseService> _logger;
+    private static string? _dataHash = null;
     private static UserDTO[] _data = null;
     private static Dictionary<int,UserDTO> _userIds;
     private static Dictionary<string,UserDTO> _userNames;
@@ -40,7 +42,12 @@ public class DatabaseService : IDatabaseService
 
             using (FileStream file = File.OpenRead(filename))
             {
+                long pos = file.Position;  //  Store position
                 _data = JsonSerializer.Deserialize<UserDTO[]>(file);
+
+                file.Position = pos; // Rewind and restore posiion of filestream
+                MD5 md5 = MD5.Create();
+                _dataHash = Convert.ToHexString(md5.ComputeHash(file));
             }
 
             if (_data == null) throw new FileLoadException($"Could not load JSON data file '{filename}'");
@@ -80,6 +87,10 @@ public class DatabaseService : IDatabaseService
 
 
 
+    public UserDTO[]? GetAllUsers()
+    {
+        return _data;
+    }
     public UserDTO? GetUserById(int id)
     {
         return _userIds.ContainsKey(id) ? _userIds[id] : null;
@@ -126,5 +137,10 @@ public class DatabaseService : IDatabaseService
         UserDTO user = GetUserById(uid);
         if (user == null) return null;
         return user.Invoices;
+    }
+
+    public string? GetDbHash()
+    {
+        return _dataHash;
     }
 }

@@ -44,7 +44,7 @@ public class LoginController : ControllerBase
         int expiryMinutes = 60;
         List<Claim> claims = GenerateClaims(user);
 
-        // Cookie authentication
+        // Cookie authentication (.Net cookie)
         await SetAuthenticationCookie(claims, expiryMinutes);
 
         // JWT bearar token authentication

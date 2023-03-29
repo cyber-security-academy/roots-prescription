@@ -365,3 +365,4 @@ FodyWeavers.xsd
 
 # vim
 *.swp
+/RootsPrescription/FileArchive/export

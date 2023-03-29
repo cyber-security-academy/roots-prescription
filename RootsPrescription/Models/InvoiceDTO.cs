@@ -6,6 +6,6 @@ public class InvoiceDTO
     public int InvoiceNo { get; set; }
     public DateTime InvoiceDate { get; set; }
     public DateTime DueDate { get; set; }
-    public string? Filename { get; set; }
+    public string Filename { get; set; }
 }
 
