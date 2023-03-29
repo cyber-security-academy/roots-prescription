@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RootsPrescription.Database;
+using RootsPrescription.Models;
 
 namespace RootsPrescription.FileStorage;
 public class FileStorageService : IFileStorageService
 {
     private readonly ILogger<FileStorageService> _logger;
-    private readonly string _filearchivepath = "FileArchive";
+    private readonly string _filearchivepath = "FileArchive/export";
+    private readonly string _hashfilename = ".db.hash.txt";
 
     public FileStorageService(ILogger<FileStorageService> logger)
     {
@@ -30,5 +33,43 @@ public class FileStorageService : IFileStorageService
             _logger.LogWarning($"Cannot find file file: {filepath}");
             return null;
         }
+    }
+
+
+
+    public void InitFileStorage(IDatabaseService dbservice)
+    {
+        string? checksum = dbservice.GetDbHash();
+        if (checksum != null) return;
+
+        // Create Base folder
+        if (!Directory.Exists(_filearchivepath))
+            Directory.CreateDirectory(_filearchivepath);
+
+        // If hashvalue does not match, rebuild links
+        UserDTO[]? users = dbservice.GetAllUsers();
+        if (!CheckDbHashValue(checksum) && users != null) {
+            // Remove existsing links
+            DeleteFileArchive(_filearchivepath);
+
+            // Create new links
+            BuildFileArchive(_filearchivepath, checksum, users);
+        }
+    }
+
+    private bool CheckDbHashValue(string hashvalue)
+    {
+        return false;
+    }
+
+    private void BuildFileArchive(string path, string hashvalue, UserDTO[] users)
+    {
+        string hashpath = Path.Combine(_filearchivepath, _hashfilename);
+        File.WriteAllText(hashpath, hashvalue);
+    }
+
+    private void DeleteFileArchive(string path)
+    {
+
     }
 }

@@ -33,3 +33,13 @@ File-->Invoice
 File-->Prescription
 
 ```
+
+
+# Systemskisse
+
+```mermaid
+graph LR;
+WordPress
+
+BGresso-->FileExport-->RootsResepter
+```

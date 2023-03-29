@@ -4,6 +4,7 @@ using RootsPrescription.Models;
 namespace RootsPrescription.Database;
 public interface IDatabaseService
 {
+    UserDTO[]? GetAllUsers();
     UserDTO GetUserById(int userid);
     UserDTO GetUserByUsername(string username);
     UserDTO GetUserByNationalId(string nationalId);
@@ -11,4 +12,6 @@ public interface IDatabaseService
     PrescriptionDTO GetPrescription(int id);
     InvoiceDTO[] GetUserInvoices(int userid);
     PrescriptionDTO[] GetUserPrescriptions(int userid);
+
+    string? GetDbHash();
 }
