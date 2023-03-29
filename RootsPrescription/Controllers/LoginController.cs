@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authentication;
 namespace RootsPrescription.Controllers;
 
 
-
+[Authorize]
 [Route("api/[controller]/[action]")]
 [ApiController]
 public class LoginController : ControllerBase
@@ -50,7 +50,20 @@ public class LoginController : ControllerBase
         // JWT bearar token authentication
         string token = GenerateToken(claims, expiryMinutes);
 
-        return Ok(token);        
+        return Ok(token);
+    }
+
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+    public async Task<IActionResult> CurrentUser()
+    {
+        string authusername = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        UserDTO authuser = _dbservice.GetUserByUsername(authusername);
+
+
+        return Ok(authuser);
     }
 
 
