@@ -6,12 +6,18 @@ namespace RootsPrescription.FileStorage;
 public class FileStorageService : IFileStorageService
 {
     private readonly ILogger<FileStorageService> _logger;
-    private readonly string _filearchivepath = "FileArchive/export";
-    private readonly string _hashfilename = ".db.hash.txt";
+    private readonly IDatabaseService _dbservice;
+    private static readonly string _filearchivebasepath = "FileArchive";
+    private static readonly string _filearchivepath = _filearchivebasepath + "/export/docs";
+    private static readonly string _hashfilename = _filearchivepath + "/.db.hash.txt";
+    private static readonly string _templateInvoice = _filearchivebasepath + "/Invoice.pdf";
+    private static readonly string _templatePrescription = _filearchivebasepath + "/Prescription.pdf";
+    private static string? _initialized = null;
 
-    public FileStorageService(ILogger<FileStorageService> logger)
+    public FileStorageService(ILogger<FileStorageService> logger, IDatabaseService dbservice)
     {
         _logger = logger;
+        _dbservice = dbservice;
     }
 
     public FileStream? GetFile(int id)
@@ -23,7 +29,9 @@ public class FileStorageService : IFileStorageService
 
     public FileStream? GetFile(string filename)
     {
-        string filepath= Path.Combine(_filearchivepath, filename);
+        if (_initialized == null) Initialize();
+
+        string filepath = Path.Combine(_filearchivepath, filename);
         if (File.Exists(filepath) || Directory.Exists(filepath))
         {
             _logger.LogInformation($"Downloading file: {filepath}");
@@ -37,39 +45,99 @@ public class FileStorageService : IFileStorageService
 
 
 
-    public void InitFileStorage(IDatabaseService dbservice)
+    protected void Initialize()
     {
-        string? checksum = dbservice.GetDbHash();
-        if (checksum != null) return;
+        _initialized = InitFileStorage(_dbservice);
+    }
 
-        // Create Base folder
-        if (!Directory.Exists(_filearchivepath))
-            Directory.CreateDirectory(_filearchivepath);
+    public string? InitFileStorage(IDatabaseService dbservice)
+    {
+        string? dbhash = dbservice.GetDbHash();
+        if (dbhash == null) return null;
+     
+        
+        UserDTO[]? users = dbservice.GetAllUsers();
+        if (users == null) return null;
+
 
         // If hashvalue does not match, rebuild links
-        UserDTO[]? users = dbservice.GetAllUsers();
-        if (!CheckDbHashValue(checksum) && users != null) {
+        if (!MatchesFolderHash(dbhash)) {
             // Remove existsing links
             DeleteFileArchive(_filearchivepath);
 
             // Create new links
-            BuildFileArchive(_filearchivepath, checksum, users);
-        }
+            BuildFileArchive(_filearchivepath, dbhash, users);
+        } 
+        return dbhash;
+        
     }
 
-    private bool CheckDbHashValue(string hashvalue)
+    private bool MatchesFolderHash(string dbhash)
     {
-        return false;
+        try
+        {
+            string folderhash = File.ReadAllText(_hashfilename);
+
+            return folderhash.Trim() == dbhash.Trim();
+        }
+        catch (IOException err)
+        {
+            return false;
+        }
     }
 
     private void BuildFileArchive(string path, string hashvalue, UserDTO[] users)
     {
-        string hashpath = Path.Combine(_filearchivepath, _hashfilename);
-        File.WriteAllText(hashpath, hashvalue);
+        _logger.LogInformation("Rebuilding FolderArchive symlinks");
+        foreach (UserDTO user in users)
+        {
+            // Create prescriptions
+            if (user.Prescriptions != null)
+            {
+                foreach (PrescriptionDTO doc in user.Prescriptions)
+                {
+                    string filepath = doc.Filename;
+                    string docpath = Path.Combine(_filearchivepath, filepath);
+                    CreateSymLink(_templatePrescription, docpath);
+                }
+            }
+            // Create invoices
+            if (user.Invoices != null)
+            {
+                foreach (InvoiceDTO doc in user.Invoices)
+                {
+                    string filepath = doc.Filename;
+                    string docpath = Path.Combine(_filearchivepath, filepath);
+                    CreateSymLink(_templateInvoice, docpath);
+                }
+            }
+        }
+
+        File.WriteAllText(_hashfilename, hashvalue);
     }
 
     private void DeleteFileArchive(string path)
     {
+        try
+        {
+            if (Directory.Exists(path))
+                Directory.Delete(path, true);
+        }
+        catch (IOException err)
+        {
+            _logger.LogWarning("Error deleting FolderArchive: " + err.Message);
+        }
+    }
 
+    private void CreateSymLink(string targetpath, string docpath)
+    {
+        string path = Path.GetDirectoryName(docpath);
+        string filename =  Path.GetFileName(docpath);
+        string target = Path.GetRelativePath(path, targetpath);
+
+        if (!Directory.Exists(path))
+            Directory.CreateDirectory(path);
+
+        File.CreateSymbolicLink(Path.Combine(path, filename), target);
     }
 }
