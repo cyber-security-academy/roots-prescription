@@ -60,7 +60,7 @@ public class DatabaseService : IDatabaseService
                 _userNames.Add(user.UserName.ToLower(), user);
                 _userNatIds.Add(user.NationalIdNumber, user);
 
-                // Extract perscriptions
+                // Extract prescriptions
                 if (user != null && user.Prescriptions != null)
                 {
                     foreach (PrescriptionDTO prescription in user.Prescriptions)

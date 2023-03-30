@@ -12,11 +12,11 @@ namespace RootsPrescription.Controllers;
 [ApiController]
 public class InvoiceController : ControllerBase
 {
-    private readonly ILogger<PrescriptionController> _logger;
+    private readonly ILogger<InvoiceController> _logger;
     private readonly IFileStorageService _filestorage;
     private readonly IDatabaseService _dbservice;
 
-    public InvoiceController(ILogger<PrescriptionController> logger, IFileStorageService filestorage, IDatabaseService dbservice)
+    public InvoiceController(ILogger<InvoiceController> logger, IFileStorageService filestorage, IDatabaseService dbservice)
     {
         _logger = logger;
         _filestorage = filestorage;
@@ -47,7 +47,7 @@ public class InvoiceController : ControllerBase
     }
 
 
-
+    
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
