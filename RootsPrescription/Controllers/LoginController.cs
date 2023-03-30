@@ -39,7 +39,11 @@ public class LoginController : ControllerBase
     public async Task<IActionResult> Login(string username, string password)
     {
         UserDTO? user = Authenticate(username, password);
-        if (user == null) return Unauthorized("Username or password is incorrect");
+        if (user == null)
+        {
+            Response.Cookies.Delete("access_token");
+            return Unauthorized("Username or password is incorrect");
+        }
 
         int expiryMinutes = 60;
         List<Claim> claims = GenerateClaims(user);
