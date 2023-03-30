@@ -34,11 +34,9 @@ public class FileStorageService : IFileStorageService
         string filepath = Path.Combine(_filearchivepath, filename);
         if (File.Exists(filepath) || Directory.Exists(filepath))
         {
-            _logger.LogInformation($"Downloading file: {filepath}");
             return System.IO.File.OpenRead(filepath);  // Use System.IO to avoid naming confusion
         } else
         {
-            _logger.LogWarning($"Cannot find file file: {filepath}");
             return null;
         }
     }
