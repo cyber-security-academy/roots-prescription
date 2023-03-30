@@ -34,8 +34,10 @@ builder.Services.AddAuthentication()
     .AddCookie(options =>
     {
         options.Cookie.Name = "access_token";
-
+        options.LoginPath = "/api/Login/Status_401"; // Wrokaround to deliver a 401 when cookie is missing / unauthorized
     });
+
+
 builder.Services.AddAuthorization(options =>
     {
         var defaultAuthorizationPolicyBuilder = new AuthorizationPolicyBuilder(

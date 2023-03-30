@@ -71,6 +71,15 @@ public class LoginController : ControllerBase
     }
 
 
+    // Workaround endpoint to mimick a 401 Unaothorized when .Net authorization cookie is missing
+    [ApiExplorerSettings(IgnoreApi = true)]
+    [AllowAnonymous]
+    [HttpGet]
+    public async Task<IActionResult> Status_401()
+    {
+        return StatusCode(401, "Unathorized");
+    }
+
     private async Task SetAuthenticationCookie(List<Claim> claims, int expiryMinutes)
     {
         var claimsIdentity = new ClaimsIdentity(
