@@ -4,19 +4,12 @@ on:
   push:
     branches:
       - 'main'
-      - 'add-deploy-workflow'  # just for testing the workflow works. Remove before merge.
   workflow_dispatch:  # To enable manual run of workflow
 
 permissions:
   contents: read
   id-token: write
 
-# CONFIGURATION
-# For help, go to https://github.com/Azure/Actions
-#
-# Set up the following secrets in your repository:
-#   AZURE_CREDENTIALS, REGISTRY_USERNAME, REGISTRY_PASSWORD, REGISTRY_URL
-# 2. Change these variables for your configuration:
 env:
   AZURE_WEBAPP_NAME: 'csa-gr${{ vars.GROUP_NUM }}-app'  # set this to your application's name
   CONTAINER_REGISTRY: ${{ vars.REGISTRY_URL }}  # set repo variable with Container Registry URL, example : xyz.azurecr.io
@@ -27,9 +20,6 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: check envs
-      run: env
-
     - name: Checkout repository
       uses: actions/checkout@v3
 
@@ -50,7 +40,9 @@ jobs:
       run: |
         docker build . -t $IMAGE_AND_TAG
         docker push $IMAGE_AND_TAG
-        echo "🚀 Pushed image to ACR: $IMAGE_AND_TAG" >> $GITHUB_STEP_SUMMARY
+        echo "### 🚀 Pushed image to ACR" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "$IMAGE_AND_TAG" >> $GITHUB_STEP_SUMMARY
 
     - name: Set Splunk token for HTTP Event Collector
       uses: Azure/appservice-settings@v1
@@ -65,7 +57,7 @@ jobs:
               },
               {
                   "name": "GroupName",
-                  "value": "${{ vars.GROUP_NUM }}",
+                  "value": "Group ${{ vars.GROUP_NUM }}",
                   "slotSetting": false
               }
           ]
