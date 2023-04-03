@@ -65,7 +65,7 @@ public class InvoiceController : ControllerBase
             _logger.LogInformation($"Downloaded: {attachmentname}");
 
             // Respond to client
-            Response.Headers.Add("Content-Disposition", $"inline; filename=\"{attachmentname}\"");
+            Response.Headers.Add("Content-Disposition", $"attachment; filename=\"{attachmentname}\"");
             Response.Headers.Add("X-Content-Type-Options", "nosniff");
             return new FileStreamResult(stream, "application/pdf");
         }
