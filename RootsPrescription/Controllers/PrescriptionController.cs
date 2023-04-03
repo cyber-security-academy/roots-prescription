@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using RootsPrescription.Database;
 using RootsPrescription.FileStorage;
@@ -31,7 +31,7 @@ public class PrescriptionController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetMyPrescriptions()
     {
-        // Find perscritions for the authenticated `User`
+        // Find prescriptions for the authenticated `User`
         string authusername = User.FindFirstValue(ClaimTypes.NameIdentifier);
         UserDTO authuser = _dbservice.GetUserByUsername(authusername);
         PrescriptionDTO[] prescriptions = _dbservice.GetUserPrescriptions(authuser.Id);

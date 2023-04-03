@@ -5,6 +5,8 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Serilog;
+using Serilog.Expressions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,14 +52,23 @@ builder.Services.AddAuthorization(options =>
 
 
 
+Log.Logger = new LoggerConfiguration()
+    .CreateLogger();
+
+// Splunk logging - HTTP Event Collector
+// https://dev.splunk.com/enterprise/docs/devtools/csharp/logging-dotnet
+// See configuration in appsettings.json
+builder.Host.UseSerilog((context, services, configuration) => configuration
+    .ReadFrom.Configuration(context.Configuration)
+);
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(options => options.EnableTryItOutByDefault());
-}
+string group = builder.Configuration["GroupName"];
+app.Logger.LogInformation($"Hello world, {group} connected!");  
+
+app.UseSwagger();
+app.UseSwaggerUI(options => options.EnableTryItOutByDefault());
 
 app.UseHttpsRedirection();
 
