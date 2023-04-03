@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using RootsPrescription.Database;
 using RootsPrescription.FileStorage;
@@ -13,7 +13,7 @@ namespace RootsPrescription.Controllers;
 
 
 
-[Route("api/[controller]/[action]")]
+[Route("[controller]/[action]")]
 [ApiController]
 public class SystemController : ControllerBase
 {

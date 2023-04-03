@@ -9,7 +9,7 @@ namespace RootsPrescription.Controllers;
 
 
 [Authorize]
-[Route("api/[controller]/[action]")]
+[Route("[controller]/[action]")]
 [ApiController]
 public class PrescriptionController : ControllerBase
 {
