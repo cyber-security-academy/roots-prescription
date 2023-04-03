@@ -1,0 +1,73 @@
+name: Build and deploy Roots Apotek app to Azure
+
+on: 
+  push:
+    branches:
+      - 'main'
+  workflow_dispatch:  # To enable manual run of workflow
+
+permissions:
+  contents: read
+  id-token: write
+
+env:
+  AZURE_WEBAPP_NAME: 'csa-gr${{ vars.GROUP_NUM }}-app'  # set this to your application's name
+  CONTAINER_REGISTRY: ${{ vars.REGISTRY_URL }}  # set repo variable with Container Registry URL, example : xyz.azurecr.io
+  IMAGE_NAME: '${{ vars.REGISTRY_URL }}/csa-roots-${{ vars.GROUP_NUM }}'
+  IMAGE_AND_TAG: '${{ vars.REGISTRY_URL }}/csa-roots-${{vars.GROUP_NUM }}:${{ github.sha }}'
+  
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Azure authentication
+      uses: azure/login@v1
+      with:
+        client-id: ${{ vars.AZURE_CLIENT_ID }}
+        tenant-id: ${{ vars.AZURE_TENANT_ID }}
+        subscription-id: ${{ vars.AZURE_SUBSCRIPTION_ID }}
+
+    - name: ACR authentication
+      shell: bash
+      run: |
+        TOKEN=$(az acr login --name $CONTAINER_REGISTRY --expose-token --output tsv --query accessToken --only-show-errors)
+        docker login $CONTAINER_REGISTRY --username 00000000-0000-0000-0000-000000000000 --password $TOKEN
+
+    - name: Docker Build & Push to ACR
+      run: |
+        docker build . -t $IMAGE_AND_TAG
+        docker push $IMAGE_AND_TAG
+        echo "### 🚀 Pushed image to ACR" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "$IMAGE_AND_TAG" >> $GITHUB_STEP_SUMMARY
+
+    - name: Set Splunk token for HTTP Event Collector
+      uses: Azure/appservice-settings@v1
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }} 
+        app-settings-json: |
+          [
+              {
+                  "name": "Serilog__WriteTo__1__Args__configureLogger__WriteTo__0__Args__eventCollectorToken",
+                  "value": "${{ vars.SPLUNK_TOKEN }}",
+                  "slotSetting": false
+              },
+              {
+                  "name": "GroupName",
+                  "value": "Group ${{ vars.GROUP_NUM }}",
+                  "slotSetting": false
+              }
+          ]
+
+    - name: 'Deploy to Azure Web App for Container'
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }} 
+        images: ${{ env.IMAGE_AND_TAG }} 
+#         startup-command: 'npm start'    # Include start up command to start the app container
+
+# For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
+
