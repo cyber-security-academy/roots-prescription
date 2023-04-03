@@ -62,7 +62,7 @@ public class InvoiceController : ControllerBase
         else
         {
             string attachmentname = Path.GetFileName(stream.Name);
-            _logger.LogInformation($"Downloaded: " + attachmentname);
+            _logger.LogInformation($"Downloaded: {attachmentname}");
 
             // Respond to client
             Response.Headers.Add("Content-Disposition", $"inline; filename=\"{attachmentname}\"");
