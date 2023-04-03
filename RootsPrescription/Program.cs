@@ -2,11 +2,9 @@ using RootsPrescription.Database;
 using RootsPrescription.FileStorage;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
-using System.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
-using Splunk.Logging;
 using Serilog;
 using Serilog.Expressions;
 

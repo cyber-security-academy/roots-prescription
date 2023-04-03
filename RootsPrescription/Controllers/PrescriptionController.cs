@@ -4,8 +4,6 @@ using RootsPrescription.Database;
 using RootsPrescription.FileStorage;
 using RootsPrescription.Models;
 using System.Security.Claims;
-using System.Diagnostics;
-using Splunk.Logging;
 
 namespace RootsPrescription.Controllers;
 
@@ -19,20 +17,12 @@ public class PrescriptionController : ControllerBase
     private readonly ILogger<PrescriptionController> _logger;
     private readonly IFileStorageService _filestorage;
     private readonly IDatabaseService _dbservice;
-	private static TraceSource trace;
 
     public PrescriptionController(ILogger<PrescriptionController> logger, IFileStorageService filestorage, IDatabaseService dbservice)
     {
         _logger = logger;
         _filestorage = filestorage;
         _dbservice = dbservice;
-
-        trace = new TraceSource("RootsPrescription");
-        trace.Switch.Level = SourceLevels.All;
-        trace.Listeners.Clear();
-        trace.Listeners.Add(new HttpEventCollectorTraceListener(
-            uri: new Uri("https://log.splunk.csa.datasnok.no"),  // must be ENV var
-            token: "ab98f781-16d4-43f4-a098-611cfb20db3f"));  // must be ENV var
     }
 
     
@@ -53,9 +43,7 @@ public class PrescriptionController : ControllerBase
         }
         else
         {
-            string logMsg = $"User {authusername} retrieved {prescriptions.Length} prescriptions";
-            _logger.LogInformation(logMsg);
-			trace.TraceEvent(TraceEventType.Information, 1, logMsg);
+            _logger.LogInformation($"User {authusername} retrieved {prescriptions.Length} prescriptions");
             return Ok(prescriptions);
         }
     }
@@ -79,17 +67,13 @@ public class PrescriptionController : ControllerBase
         // Respond
         if (stream == null)
         {
-            string logMsg = $"The prescription #{id} ({prescription.Filename}) was not found in the file archive";
-            _logger.LogWarning(logMsg);
-			trace.TraceEvent(TraceEventType.Information, 1, logMsg);
+            _logger.LogWarning($"The prescription #{id} ({prescription.Filename}) was not found in the file archive");
             return NotFound();
         }
         else
         {
             string attachmentname = Path.GetFileName(stream.Name);
-            string logMsg = $"Downloaded {attachmentname}";
-            _logger.LogInformation(logMsg);
-			trace.TraceEvent(TraceEventType.Information, 1, logMsg);
+            _logger.LogInformation($"Downloaded {attachmentname}");
             Response.Headers.Add("Content-Disposition", $"inline; filename=\"{attachmentname}\"");
             Response.Headers.Add("X-Content-Type-Options", "nosniff");
             return new FileStreamResult(stream, "application/pdf");

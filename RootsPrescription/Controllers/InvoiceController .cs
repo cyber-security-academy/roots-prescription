@@ -4,8 +4,6 @@ using RootsPrescription.Database;
 using RootsPrescription.FileStorage;
 using RootsPrescription.Models;
 using System.Security.Claims;
-using System.Diagnostics;
-using Splunk.Logging;
 
 namespace RootsPrescription.Controllers;
 
@@ -42,8 +40,7 @@ public class InvoiceController : ControllerBase
         }
         else
         {
-			string logMsg = $"User {authuser.NationalIdNumber} {authuser.UserName} retrieved {invoices.Length} invoices";
-            _logger.LogInformation(logMsg);
+            _logger.LogInformation($"User {authuser.NationalIdNumber} {authuser.UserName} retrieved {invoices.Length} invoices");
 
             return Ok(invoices);
         }
@@ -65,8 +62,7 @@ public class InvoiceController : ControllerBase
         else
         {
             string attachmentname = Path.GetFileName(stream.Name);
-			string logMsg = $"Downloaded: {attachmentname}";
-            _logger.LogInformation(logMsg);
+            _logger.LogInformation($"Downloaded: {attachmentname}");
 
             // Respond to client
             Response.Headers.Add("Content-Disposition", $"inline; filename=\"{attachmentname}\"");
