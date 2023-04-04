@@ -9,7 +9,7 @@ Denne oppgaven kommer i 3 steg. Det er lurt å gjør stegene etter hverandre og 
 
 ---
 
-### 🪵 Steg 1: Hvem gjør kallet?
+### Steg 1: Hvem gjør kallet?
 Incident Response Teamet (IRT) har tatt kontakt! 
 De ser at det er unormalt mange kall mot endepunktene for nedlasting av filer, 
 men de forstår ikke hva som skjer fordi loggmeldingene er uklare!
@@ -23,7 +23,7 @@ Legg til endringene i produksjonsmiljøet. Fortsett på steg 2, men husk å sjek
 
 ---
 
-### 🪵 Steg 2: Er det en uautorisert bruker som gjør kallet?
+### Steg 2: Er det en uautorisert bruker som gjør kallet?
 Dere ser i loggene at det er noen uten bruker som henter filer! Å nei!
 Det betyr at vi har samme sårbarhet som i den store hendelsen. 
 IRT ber oss legge til informasjon i loggene. Kravet er å logge **forsøk på kall av brukere som ikke er autorisert til å gjøre kallet**.
@@ -36,7 +36,7 @@ Legg til endringene i produksjonsmiljøet. Fortsett på steg 3, men husk å sjek
 
 ---
 
-### 🪵 Steg 3: Prøver noen å hente en fil som ikke finnes?
+### Steg 3: Prøver noen å hente en fil som ikke finnes?
 * forsøk på å laste ned filer som ikke finnes, og hvem som gjør kallet
 
 ### Neste oppgave
