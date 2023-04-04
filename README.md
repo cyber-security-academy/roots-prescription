@@ -14,7 +14,7 @@ Applikasjonen dere ble presentert for på dag 1 skal vi nå utvikle videre på.
 Først, la oss gå gjennom hva som har skjedd.
 Roots Apotek fikk en melding om at deres resepter var på avveie. Kilden var en av microservicene for nedlasting av PDFer for resept og faktura. De fant ut at det var mulig å for innloggede brukere å laste ned andres resepter gjennom URLen `/Prescription/GetPdf`. 
 
-Årsaken til sårbarheten ble identifisert. Sårbarheten lå på i funksjonen [GetPdf](RootsPrescription/Controllers/PrescriptionController.cs#L51-L85) i controlleren `PrescriptionController.cs`. Hullet er nå tettet og vi kan stole på at funksjonen er sikker.
+Årsaken til sårbarheten ble identifisert. Sårbarheten lå på i funksjonen [GetPdf](RootsPrescription/Controllers/PrescriptionController.cs#L51-L85) i controlleren `PrescriptionController.cs`. Hullet er nå tettet og dere kan anta at funksjonen er sikker.
 
 Etter en sikkerhetsgjennomgang er det avdekket at loggene må ryddes opp i. Dette er dere i Sopra Steria hyret inn for å løse.
 
