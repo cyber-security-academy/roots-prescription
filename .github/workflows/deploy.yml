@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'main'
+      - 'training'
   workflow_dispatch:  # To enable manual run of workflow
 
 permissions:
