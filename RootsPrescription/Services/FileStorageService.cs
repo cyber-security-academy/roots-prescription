@@ -32,11 +32,15 @@ public class FileStorageService : IFileStorageService
         if (_initialized == null) Initialize();
 
         string filepath = Path.Combine(_filearchivepath, filename);
+        _logger.LogDebug($"DBG GetFile(): filepath: {filepath}");
+
         if (File.Exists(filepath) || Directory.Exists(filepath))
         {
+            _logger.LogDebug($"DBG GetFile(): File {filepath} exists: {File.Exists(filepath)} Dir exists: {Directory.Exists(filepath)}");
             return System.IO.File.OpenRead(filepath);  // Use System.IO to avoid naming confusion
         } else
         {
+            _logger.LogDebug($"DBG GetFile(): File {filepath} does not exist!");
             return null;
         }
     }
@@ -51,6 +55,7 @@ public class FileStorageService : IFileStorageService
     public string? InitFileStorage(IDatabaseService dbservice)
     {
         string? dbhash = dbservice.GetDbHash();
+        _logger.LogInformation($"DEBUG InitFileStorage(): DB hash: {dbhash}");
         if (dbhash == null) return null;
      
         
@@ -72,14 +77,19 @@ public class FileStorageService : IFileStorageService
 
     private bool MatchesFolderHash(string dbhash)
     {
+        _logger.LogInformation($"DEBUG MatchesFolderHash(): Loading: {_hashfilename}");
+
         try
         {
             string folderhash = File.ReadAllText(_hashfilename);
+            _logger.LogInformation($"DEBUG MatchesFolderHash(): Folder hash: {folderhash}");
 
             return folderhash.Trim() == dbhash.Trim();
         }
         catch (IOException err)
         {
+            _logger.LogWarning($"MatchesFolderHash(): Exception: {err.Message}");
+            _logger.LogInformation($"DEBUG MatchesFolderHash(): The {_hashfilename} does not exist, returning 'false'");
             return false;
         }
     }
@@ -118,8 +128,13 @@ public class FileStorageService : IFileStorageService
     {
         try
         {
+            _logger.LogInformation($"DEBUG: DeleteFileArchive({path})");
             if (Directory.Exists(path))
+            {
+                _logger.LogInformation($"DEBUG: DeleteFileArchive(): Deleting {path}");
                 Directory.Delete(path, true);
+                _logger.LogInformation($"DEBUG: DeleteFileArchive(): Deleted {path}");
+            }
         }
         catch (IOException err)
         {
@@ -136,6 +151,7 @@ public class FileStorageService : IFileStorageService
         if (!Directory.Exists(path))
             Directory.CreateDirectory(path);
 
+        _logger.LogInformation($"DEBUG: DeleteFileArchive(): Creating {path}");
         File.CreateSymbolicLink(Path.Combine(path, filename), target);
     }
 }
