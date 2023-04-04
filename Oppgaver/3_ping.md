@@ -15,4 +15,7 @@ for å gjøre dere litt varme i trøya slik at dere kan det grunnleggende.
 5. Gratulerer! Dere har nå gjort deres første kodeendring i produksjons-miljøet! Gå til "Actions"-tabben øverst på siden i GitHub. Der ser dere en GitHub workflow som ble trigget automatisk da kodeendringen ble godkjent. Når den blir grønn, gå til neste steg. Dersom workflowen feiler, ta kontakt med en av kursholderne.
 6. Sjekk endringen i Splunk. Først, gå til `/swagger`. Gå deretter til "System"-seksjonen og åpne `/System/Ping`. Trykk "Execute" og dere har nå gjort et kall som skal vises i Splunk med den nye meldingen.
 
+
+### Neste oppgave
 Det er bra dere er litt varme i trøya nå, for personvernekspertene i Roots Apotek har en [oppgave til dere](./4_fiks-loggmeldingen.md)!
+

@@ -39,4 +39,6 @@ Legg til endringene i produksjonsmiljøet. Fortsett på steg 3, men husk å sjek
 ### 🪵 Steg 3: Prøver noen å hente en fil som ikke finnes?
 * forsøk på å laste ned filer som ikke finnes, og hvem som gjør kallet
 
+### Neste oppgave
 Legg til endringene i produksjonsmiljøet. Sjekk loggene i Splunk. Når det er klart, gå til neste oppgave, [bonusoppgaven](./6_fiks_s%C3%A5rbarheten.md)!
+
