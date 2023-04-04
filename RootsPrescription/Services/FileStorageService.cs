@@ -32,15 +32,12 @@ public class FileStorageService : IFileStorageService
         if (_initialized == null) Initialize();
 
         string filepath = Path.Combine(_filearchivepath, filename);
-        _logger.LogDebug($"DBG GetFile(): filepath: {filepath}");
 
         if (File.Exists(filepath) || Directory.Exists(filepath))
         {
-            _logger.LogDebug($"DBG GetFile(): File {filepath} exists: {File.Exists(filepath)} Dir exists: {Directory.Exists(filepath)}");
             return System.IO.File.OpenRead(filepath);  // Use System.IO to avoid naming confusion
         } else
         {
-            _logger.LogDebug($"DBG GetFile(): File {filepath} does not exist!");
             return null;
         }
     }
@@ -55,7 +52,7 @@ public class FileStorageService : IFileStorageService
     public string? InitFileStorage(IDatabaseService dbservice)
     {
         string? dbhash = dbservice.GetDbHash();
-        _logger.LogInformation($"DEBUG InitFileStorage(): DB hash: {dbhash}");
+        _logger.LogDebug($"InitFileStorage(): DB hash: {dbhash}");
         if (dbhash == null) return null;
      
         
@@ -77,19 +74,20 @@ public class FileStorageService : IFileStorageService
 
     private bool MatchesFolderHash(string dbhash)
     {
-        _logger.LogInformation($"DEBUG MatchesFolderHash(): Loading: {_hashfilename}");
+        _logger.LogDebug($"MatchesFolderHash(): Loading: {_hashfilename}");
 
         try
         {
             string folderhash = File.ReadAllText(_hashfilename);
-            _logger.LogInformation($"DEBUG MatchesFolderHash(): Folder hash: {folderhash}");
+            _logger.LogDebug($"MatchesFolderHash(): Folder hash: {folderhash}");
 
             return folderhash.Trim() == dbhash.Trim();
         }
         catch (IOException err)
         {
-            _logger.LogWarning($"MatchesFolderHash(): Exception: {err.Message}");
-            _logger.LogInformation($"DEBUG MatchesFolderHash(): The {_hashfilename} does not exist, returning 'false'");
+            // The hash file does not exists, return false
+            _logger.LogDebug($"MatchesFolderHash(): Exception: {err.Message}");
+            _logger.LogDebug($"MatchesFolderHash(): The {_hashfilename} does not exist, returning 'false'");
             return false;
         }
     }
@@ -120,25 +118,24 @@ public class FileStorageService : IFileStorageService
                 }
             }
         }
-
+        _logger.LogDebug($"BuildFileArchive(): Creating: {_hashfilename}, with hashvalue: {hashvalue}");
         File.WriteAllText(_hashfilename, hashvalue);
+        _logger.LogDebug($"BuildFileArchive(): Verify: reading {_hashfilename}: {File.ReadAllText(_hashfilename)}");
     }
 
     private void DeleteFileArchive(string path)
     {
         try
         {
-            _logger.LogInformation($"DEBUG: DeleteFileArchive({path})");
             if (Directory.Exists(path))
             {
-                _logger.LogInformation($"DEBUG: DeleteFileArchive(): Deleting {path}");
+                _logger.LogDebug($"DEBUG: DeleteFileArchive(): Deleting {path}");
                 Directory.Delete(path, true);
-                _logger.LogInformation($"DEBUG: DeleteFileArchive(): Deleted {path}");
             }
         }
         catch (IOException err)
         {
-            _logger.LogWarning("Error deleting FolderArchive: " + err.Message);
+            _logger.LogError("Error deleting FolderArchive: " + err.Message);
         }
     }
 
@@ -151,7 +148,6 @@ public class FileStorageService : IFileStorageService
         if (!Directory.Exists(path))
             Directory.CreateDirectory(path);
 
-        _logger.LogInformation($"DEBUG: DeleteFileArchive(): Creating {path}");
         File.CreateSymbolicLink(Path.Combine(path, filename), target);
     }
 }
