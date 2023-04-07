@@ -65,7 +65,7 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
 var app = builder.Build();
 
 string group = builder.Configuration["GroupName"];
-app.Logger.LogInformation($"Hello world, {group} connected!");  
+app.Logger.LogInformation("Hello world, {GroupName} connected!", group);  
 
 app.UseSwagger();
 app.UseSwaggerUI(options => options.EnableTryItOutByDefault());
