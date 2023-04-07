@@ -43,7 +43,7 @@ public class PrescriptionController : ControllerBase
         }
         else
         {
-            _logger.LogInformation($"User {authusername} retrieved {prescriptions.Length} prescriptions");
+            _logger.LogInformation("User {Username} retrieved {NoOfDocs} prescriptions", authusername, prescriptions.Length);
             return Ok(prescriptions);
         }
     }
@@ -67,13 +67,13 @@ public class PrescriptionController : ControllerBase
         // Respond
         if (stream == null)
         {
-            _logger.LogWarning($"The prescription #{id} ({prescription.Filename}) was not found in the file archive");
+            _logger.LogWarning("The prescription #{Id} ({Filename}) was not found in the file archive", id, prescription.Filename);
             return NotFound();
         }
         else
         {
             string attachmentname = Path.GetFileName(stream.Name);
-            _logger.LogInformation($"Downloaded: {attachmentname}");
+            _logger.LogInformation("Downloaded: {Attachment}", attachmentname);
 
             // Respond to client
             Response.Headers.Add("Content-Disposition", $"attachment; filename=\"{attachmentname}\"");

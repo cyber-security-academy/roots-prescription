@@ -52,7 +52,7 @@ public class FileStorageService : IFileStorageService
     public string? InitFileStorage(IDatabaseService dbservice)
     {
         string? dbhash = dbservice.GetDbHash();
-        _logger.LogDebug($"InitFileStorage(): DB hash: {dbhash}");
+        _logger.LogDebug("InitFileStorage(): DB hash: {Hash}", dbhash);
         if (dbhash == null) return null;
      
         
@@ -74,27 +74,27 @@ public class FileStorageService : IFileStorageService
 
     private bool MatchesFolderHash(string dbhash)
     {
-        _logger.LogDebug($"MatchesFolderHash(): Loading: {_hashfilename}");
+        _logger.LogDebug("MatchesFolderHash(): Loading: {HashFilename}", _hashfilename);
 
         try
         {
             string folderhash = File.ReadAllText(_hashfilename);
-            _logger.LogDebug($"MatchesFolderHash(): Folder hash: {folderhash}");
+            _logger.LogDebug("MatchesFolderHash(): Folder hash: {Hash}", folderhash);
 
             return folderhash.Trim() == dbhash.Trim();
         }
         catch (IOException err)
         {
             // The hash file does not exists, return false
-            _logger.LogDebug($"MatchesFolderHash(): Exception: {err.Message}");
-            _logger.LogDebug($"MatchesFolderHash(): The {_hashfilename} does not exist, returning 'false'");
+            _logger.LogDebug("MatchesFolderHash(): Exception: {ErrMessage}", err.Message);
+            _logger.LogDebug("MatchesFolderHash(): The {HashFilename} does not exist, returning 'false'", _hashfilename);
             return false;
         }
     }
 
     private void BuildFileArchive(string path, string hashvalue, UserDTO[] users)
     {
-        _logger.LogInformation("Rebuilding FolderArchive symlinks");
+        _logger.LogInformation("Rebuilding symlinks in folder archive");
         foreach (UserDTO user in users)
         {
             // Create prescriptions
@@ -118,9 +118,9 @@ public class FileStorageService : IFileStorageService
                 }
             }
         }
-        _logger.LogDebug($"BuildFileArchive(): Creating: {_hashfilename}, with hashvalue: {hashvalue}");
+        _logger.LogDebug("BuildFileArchive(): Creating: {HashFilename}, with hashvalue: {HashValue}", _hashfilename, hashvalue);
         File.WriteAllText(_hashfilename, hashvalue);
-        _logger.LogDebug($"BuildFileArchive(): Verify: reading {_hashfilename}: {File.ReadAllText(_hashfilename)}");
+        _logger.LogDebug("BuildFileArchive(): Verify: Reading {HashFilename}: {HashValue}", _hashfilename, File.ReadAllText(_hashfilename));
     }
 
     private void DeleteFileArchive(string path)
@@ -129,13 +129,13 @@ public class FileStorageService : IFileStorageService
         {
             if (Directory.Exists(path))
             {
-                _logger.LogDebug($"DEBUG: DeleteFileArchive(): Deleting {path}");
+                _logger.LogDebug("DEBUG: DeleteFileArchive(): Deleting {Path}", path);
                 Directory.Delete(path, true);
             }
         }
         catch (IOException err)
         {
-            _logger.LogError("Error deleting FolderArchive: " + err.Message);
+            _logger.LogError("Error deleting FolderArchive: {ErrMessage}", err.Message);
         }
     }
 
