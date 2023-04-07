@@ -26,7 +26,7 @@ public class SystemController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public ActionResult<string> Ping()
     {
-        const string message = "--CHANGE ME--";
+        const string message = "--CHANGED--";
 
         return message;
     }
