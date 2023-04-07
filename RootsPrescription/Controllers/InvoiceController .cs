@@ -40,8 +40,7 @@ public class InvoiceController : ControllerBase
         }
         else
         {
-            _logger.LogInformation($"User {authuser.NationalIdNumber} {authuser.UserName} retrieved {invoices.Length} invoices");
-
+            _logger.LogInformation("User {Username} retrieved {NoOfInvoices} invoices", authuser.UserName, invoices.Length);
             return Ok(invoices);
         }
     }
@@ -62,7 +61,7 @@ public class InvoiceController : ControllerBase
         else
         {
             string attachmentname = Path.GetFileName(stream.Name);
-            _logger.LogInformation($"Downloaded: {attachmentname}");
+            _logger.LogInformation("Downloaded: {Attachment}", attachmentname);
 
             // Respond to client
             Response.Headers.Add("Content-Disposition", $"attachment; filename=\"{attachmentname}\"");
