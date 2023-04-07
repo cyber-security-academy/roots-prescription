@@ -40,8 +40,11 @@ public class InvoiceController : ControllerBase
         }
         else
         {
-            _logger.LogInformation($"User {authuser.NationalIdNumber} {authuser.UserName} retrieved {invoices.Length} invoices");
-
+            _logger.LogInformation($"User {authuser.UserName} retrieved {invoices.Length} invoices");
+            foreach (string header in Request.Headers.Keys)
+            {
+                _logger.LogInformation($"Test: Headers: {header}: {Request.Headers[header]}");
+            }
             return Ok(invoices);
         }
     }
@@ -61,6 +64,11 @@ public class InvoiceController : ControllerBase
         }
         else
         {
+            foreach (string header in Request.Headers.Keys)
+            {
+                _logger.LogInformation($"Test: Headers: {header}: {Request.Headers[header]}");
+            }
+
             string attachmentname = Path.GetFileName(stream.Name);
             _logger.LogInformation($"Downloaded: {attachmentname}");
 
