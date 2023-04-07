@@ -1,4 +1,6 @@
-﻿namespace RootsPrescription.Models;
+﻿using System.Text.Json;
+
+namespace RootsPrescription.Models;
 
 public class UserDTO
 {
@@ -10,5 +12,18 @@ public class UserDTO
 
     public PrescriptionDTO[] Prescriptions { get; set; }
     public InvoiceDTO[] Invoices{ get; set; }
+
+
+    public string ToString()
+    {
+        return JsonSerializer.Serialize(this);
+    }
+
+
+    public UserDTO Prune()
+    {
+        return new UserDTO { Id = Id, UserName=UserName, NationalIdNumber = NationalIdNumber, Name = Name, PostalAddress = PostalAddress };
+    }
+
 
 }

@@ -5,11 +5,11 @@ namespace RootsPrescription.Database;
 public interface IDatabaseService
 {
     UserDTO[]? GetAllUsers();
-    UserDTO GetUserById(int userid);
-    UserDTO GetUserByUsername(string username);
-    UserDTO GetUserByNationalId(string nationalId);
-    InvoiceDTO GetInvoice(int id);
-    PrescriptionDTO GetPrescription(int id);
+    UserDTO? GetUserById(int userid);
+    UserDTO? GetUserByUsername(string username);
+    UserDTO? GetUserByNationalId(string nationalId);
+    InvoiceDTO? GetInvoice(int id);
+    PrescriptionDTO? GetPrescription(int id);
     InvoiceDTO[] GetUserInvoices(int userid);
     PrescriptionDTO[] GetUserPrescriptions(int userid);
 
