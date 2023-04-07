@@ -36,7 +36,7 @@ public class DatabaseService : IDatabaseService
         // TODO: Fix this to be a working singleton for the whole application
         if (_data == null)
         {
-            _logger.LogInformation("Loading JSON database {Filename}", filename);
+            _logger.LogInformation("Loading JSON database '{Filename}'", filename);
             _userIds = new();
             _userNames = new();
             _userNatIds = new();
@@ -54,7 +54,7 @@ public class DatabaseService : IDatabaseService
                 _dataHash = Convert.ToHexString(md5.ComputeHash(file));
             }
 
-            if (_data == null) throw new FileLoadException($"Could not load JSON data file {filename}");
+            if (_data == null) throw new FileLoadException($"Could not load JSON data file '{filename}'");
 
             // Loop Users
             foreach (UserDTO user in _data)

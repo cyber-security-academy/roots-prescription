@@ -56,7 +56,6 @@ public class InvoiceController : ControllerBase
         FileStream stream = _filestorage.GetFile(filename);
         if (stream == null)
         {
-            _logger.LogInformation("Cannot find: {Filename}", filename);
             return NotFound();
         }
         else
