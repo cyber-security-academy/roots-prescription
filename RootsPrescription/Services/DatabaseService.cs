@@ -36,7 +36,7 @@ public class DatabaseService : IDatabaseService
         // TODO: Fix this to be a working singleton for the whole application
         if (_data == null)
         {
-            _logger.LogInformation($"Loading JSON database '{filename}'");
+            _logger.LogInformation("Loading JSON database '{Filename}'", filename);
             _userIds = new();
             _userNames = new();
             _userNatIds = new();
@@ -85,7 +85,7 @@ public class DatabaseService : IDatabaseService
 
                 }
             }
-            _logger.LogInformation($"Loaded {_data.Length} users from JSON database");
+            _logger.LogInformation("Loaded {Count} users from JSON database", _data.Length);
         }
     }
 
@@ -94,10 +94,13 @@ public class DatabaseService : IDatabaseService
         return _data;
     }
 
-    public UserDTO? GetUserById(int id)
+    public UserDTO? GetUserById(int id, bool extendedUser = false)
     {
         UserDTO? user = _userIds.ContainsKey(id) ? _userIds[id] : null;
-        return user == null ? null : user.Prune();
+        if (extendedUser || user == null)
+            return user;
+        else
+            return user.Prune();
     }
 
     public UserDTO? GetUserByUsername(string username)
@@ -137,14 +140,14 @@ public class DatabaseService : IDatabaseService
 
     public PrescriptionDTO[]? GetUserPrescriptions(int userid)
     {
-        UserDTO user = GetUserById(userid);
+        UserDTO user = GetUserById(userid, true);
         if (user == null) return null;
         return user.Prescriptions;
     }
 
-    public InvoiceDTO[]? GetUserInvoices(int uid)
+    public InvoiceDTO[]? GetUserInvoices(int userid)
     {
-        UserDTO user = GetUserById(uid);
+        UserDTO user = GetUserById(userid, true);
         if (user == null) return null;
         return user.Invoices;
     }
