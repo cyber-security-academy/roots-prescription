@@ -1,4 +1,4 @@
-# Kom i gang - les logger i Splunk (10-15 minutter)
+# Les logger i Splunk (10-15 minutter)
 
 Vi har blitt ansatt til å rette opp i loggene. Da må vi først gjøre oss kjent med 
 logg-verktøyet som kunden bruker, Splunk.
