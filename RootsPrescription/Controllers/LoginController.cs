@@ -51,7 +51,7 @@ public class LoginController : ControllerBase
         // Cookie authentication (.Net cookie)
         await SetAuthenticationCookie(claims, expiryMinutes);
 
-        // JWT bearar token authentication
+        // JWT bearer token authentication
         string token = GenerateToken(claims, expiryMinutes);
 
         _logger.LogInformation($"User logged in: {user.ToString()}");
