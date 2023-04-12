@@ -30,6 +30,7 @@ public class DatabaseService : IDatabaseService
 
         LoadJsonToLookupTables(@"Data/user-info.json");
     }
+
     private void LoadJsonToLookupTables(string filename)
     {
         // TODO: Fix this to be a working singleton for the whole application
@@ -88,28 +89,31 @@ public class DatabaseService : IDatabaseService
         }
     }
 
-
-
     public UserDTO[]? GetAllUsers()
     {
         return _data;
     }
+
     public UserDTO? GetUserById(int id)
     {
-        return _userIds.ContainsKey(id) ? _userIds[id] : null;
+        UserDTO? user = _userIds.ContainsKey(id) ? _userIds[id] : null;
+        return user == null ? null : user.Prune();
     }
+
     public UserDTO? GetUserByUsername(string username)
     {
         username = username.ToLower().Trim();
-        return _userNames.ContainsKey(username) ? _userNames[username] : null;
+        UserDTO? user = _userNames.ContainsKey(username) ? _userNames[username] : null;
+        return user == null ? null : user.Prune();
     }
 
     public UserDTO? GetUserByNationalId(string nationalId)
     {
-        return _userNatIds.ContainsKey(nationalId) ? _userNatIds[nationalId] : null;
+        UserDTO? user = _userNatIds.ContainsKey(nationalId) ? _userNatIds[nationalId] : null;
+        return user == null ? null : user.Prune();
     }
 
-    public PrescriptionDTO GetPrescription(int id)
+    public PrescriptionDTO? GetPrescription(int id)
     {
         if (_prescriptions.ContainsKey(id))
         {
@@ -119,7 +123,8 @@ public class DatabaseService : IDatabaseService
             return null;
         }
     }
-    public InvoiceDTO GetInvoice(int id)
+
+    public InvoiceDTO? GetInvoice(int id)
     {
         if (_invoices.ContainsKey(id))
         {
@@ -129,13 +134,15 @@ public class DatabaseService : IDatabaseService
             return null;
         }
     }
-    public PrescriptionDTO[] GetUserPrescriptions(int userid)
+
+    public PrescriptionDTO[]? GetUserPrescriptions(int userid)
     {
         UserDTO user = GetUserById(userid);
         if (user == null) return null;
         return user.Prescriptions;
     }
-    public InvoiceDTO[] GetUserInvoices(int uid)
+
+    public InvoiceDTO[]? GetUserInvoices(int uid)
     {
         UserDTO user = GetUserById(uid);
         if (user == null) return null;
