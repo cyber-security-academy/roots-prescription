@@ -5,7 +5,7 @@ Denne oppgaven handler om å teste hvordan APIet fungerer. APIet er beregnet for
 ### URLen til APIet deres
 Hver gruppe har sitt eget API med egen URL. Under er URLen til applikasjonen deres, husk å bytte med deres gruppenummer. 
 
-**https://csa-gr[gruppenummer]-app.azurewebsites.net/** *Husk å bytte ut `[GRUPPENUMMER]`, f.eks. `csa-gr9-app`*
+**https://csa-gr[GRUPPENUMMER]-app.azurewebsites.net/** *Husk å bytte ut `[GRUPPENUMMER]`, f.eks. `csa-gr9-app`*
 
 > Hver gang vi refererer til APIet og en tekst som inneholder en slash (/), mener vi URLen deres med denne teksten bak. F.eks. `/Prescription/GetPdf` blir til "https://csa-gr9-app.azurewebsites.net/Prescription/GetPdf".
 
