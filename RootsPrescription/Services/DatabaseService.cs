@@ -94,10 +94,17 @@ public class DatabaseService : IDatabaseService
         return _data;
     }
 
-    public UserDTO? GetUserById(int id)
+    public UserDTO? GetUserById(int id, bool returnExtendedObject=false)
     {
         UserDTO? user = _userIds.ContainsKey(id) ? _userIds[id] : null;
-        return user == null ? null : user.Prune();
+        if (returnExtendedObject || user == null)
+        {
+            return user;
+        }
+        else
+        {
+            return user.Prune();
+        }
     }
 
     public UserDTO? GetUserByUsername(string username)
@@ -137,14 +144,14 @@ public class DatabaseService : IDatabaseService
 
     public PrescriptionDTO[]? GetUserPrescriptions(int userid)
     {
-        UserDTO user = GetUserById(userid);
+        UserDTO user = GetUserById(userid, true);
         if (user == null) return null;
         return user.Prescriptions;
     }
 
     public InvoiceDTO[]? GetUserInvoices(int uid)
     {
-        UserDTO user = GetUserById(uid);
+        UserDTO user = GetUserById(uid, true);
         if (user == null) return null;
         return user.Invoices;
     }
