@@ -1,11 +1,15 @@
-# Roots Apotek - Microservice for resepter
+# Roots Apotek - Microservice for resepter (5-10 minutter)
 
-Denne oppgaven handler om å teste hvordan APIet fungerer. APIet er beregnet for maskiner. Men noe som heter Open API (tidligere "Swagger") lar et menneske lettere får oversikt, og teste et REST API.
+Denne oppgaven handler om å teste hvordan APIet fungerer. APIet er beregnet for maskiner, men noe som heter OpenAPI (tidligere "Swagger") lar et menneske lettere får oversikt og teste et REST API. Det skal vi gjøre nå!
 
-*Antatt tidsbruk: 5 min*
+### URLen til APIet deres
+Hver gruppe har sitt eget API med egen URL. Under er URLen til applikasjonen deres, husk å bytte med deres gruppenummer. 
+
+**https://csa-gr[gruppenummer]-app.azurewebsites.net/** *Husk å bytte ut `[GRUPPENUMMER]`, f.eks. `csa-gr9-app`*
+
+> Hver gang vi refererer til APIet og en tekst som inneholder en slash (/), mener vi URLen deres med denne teksten bak. F.eks. `/Prescription/GetPdf` blir til "https://csa-gr9-app.azurewebsites.net/Prescription/GetPdf".
 
 ### 1) Lokaliser ditt API
-
 - Gå til https://csa-gr[GRUPPENUMMER]-app.azurewebsites.net/swagger
 - User `System`-kontrolleren, kjør Execute på `/System/Ping`, og du bør motta en *response* `-- CHANGE ME--`.
 
@@ -33,4 +37,3 @@ Denne oppgaven handler om å teste hvordan APIet fungerer. APIet er beregnet for
 
 ## Neste oppgave
 Når dere har lastet ned en PDF kan dere går videre til [neste oppgave](./2_les-logger-i-Splunk.md)!
-
