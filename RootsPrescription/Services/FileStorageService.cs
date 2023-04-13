@@ -75,6 +75,7 @@ public class FileStorageService : IFileStorageService
     private bool MatchesFolderHash(string dbhash)
     {
         _logger.LogDebug("MatchesFolderHash(): Loading: {HashFilename}", _hashfilename);
+        if (!File.Exists(_hashfilename)) return false; 
 
         try
         {
@@ -84,8 +85,7 @@ public class FileStorageService : IFileStorageService
             return folderhash.Trim() == dbhash.Trim();
         }
         catch (IOException err)
-        {
-            // The hash file does not exists, return false
+        {            
             _logger.LogError("MatchesFolderHash(): Exception: {ErrMessage}", err.Message);
             _logger.LogError("MatchesFolderHash(): The {HashFilename} does not exist, returning 'false'", _hashfilename);
             return false;
