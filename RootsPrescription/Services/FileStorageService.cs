@@ -86,8 +86,8 @@ public class FileStorageService : IFileStorageService
         catch (IOException err)
         {
             // The hash file does not exists, return false
-            _logger.LogDebug("MatchesFolderHash(): Exception: {ErrMessage}", err.Message);
-            _logger.LogDebug("MatchesFolderHash(): The {HashFilename} does not exist, returning 'false'", _hashfilename);
+            _logger.LogError("MatchesFolderHash(): Exception: {ErrMessage}", err.Message);
+            _logger.LogError("MatchesFolderHash(): The {HashFilename} does not exist, returning 'false'", _hashfilename);
             return false;
         }
     }
