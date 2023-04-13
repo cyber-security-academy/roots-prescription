@@ -3,9 +3,9 @@
 ## URL
 Hver gruppe har sin egen applikasjon med egen URL. Under er URLen til applikasjonen deres, husk å bytte med deres gruppenummer. 
 
-**https://csa-gr[gruppenummer]-app.scm.azurewebsites.net/**
+**https://csa-gr[GRUPPENUMMER]-app.scm.azurewebsites.net/**  *Husk å bytte ut `[GRUPPENUMMER]`, f.eks. `csa-gr9-app`*
 
-> Når vi snakker om en URL og en tekst som inneholder en slash (/), mener vi URLen deres med denne teksten bak. F.eks. `/Prescription/GetPdf` blir til "https://csa-gr[gruppenummer]-app.scm.azurewebsites.net/Prescription/GetPdf".
+> Når vi snakker om en URL og en tekst som inneholder en slash (/), mener vi URLen deres med denne teksten bak. F.eks. `/Prescription/GetPdf` blir til f.eks. "https://csa-gr9-app.azurewebsites.net/Prescription/GetPdf".
 
 ## Introduksjon
 Velkommen til dag to av kurset. I dag tar dere rollen som utviklere! 
@@ -30,7 +30,10 @@ Dere kan begynne på [oppgaven om trusselmodellering](Oppgaver/1_trusselmodeller
 
 
 ## Arkitektur
-Roots Apoteks mikroservice for resepter består av 3 *controllere* (Login, Prescriptions og Invoice) som tilbyr URLer, og 2 *servicer* som snakker med backend.
+Roots Apoteks har eksportert en mappe med PDFer (resepter og faktura) fra fagsystemet, til en beskyttet mappe som kun en servicebrukeren har tilgang til. 
+De har laget en mikroservice som tilbyr reseptene og fakturakopi til kundene på nettet.
+
+Microservicen for resepter består av 3 *controllere* (Login, Prescriptions og Invoice) som tilbyr URLer, og 2 *servicer* (FileStorage og Database), og som snakker med backend.
 
 
 Dataflyt er som følger:
@@ -51,12 +54,3 @@ File-->Prescription
 
 ```
 
-
-# Systemskisse
-
-```mermaid
-graph LR;
-WordPress
-
-BGresso-->FileExport-->RootsResepter
-```
