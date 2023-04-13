@@ -9,7 +9,7 @@ namespace RootsPrescription.Controllers;
 
 
 [Authorize]
-[Route("api/[controller]/[action]")]
+[Route("[controller]/[action]")]
 [ApiController]
 public class PrescriptionController : ControllerBase
 {
@@ -60,7 +60,11 @@ public class PrescriptionController : ControllerBase
 
         // Verify that the prescription is owned by the user
         PrescriptionDTO prescription = _dbservice.GetPrescription(id);
-        if (prescription == null || prescription.OwnerId != authuser.Id) return Unauthorized();
+        if (prescription == null || prescription.OwnerId != authuser.Id)
+        {
+            _logger.LogWarning($"Unauthorized attempt by user {authuser.UserName} of fetching prescription id #{id}");
+            return Unauthorized();
+        }
 
         FileStream stream = _filestorage.GetFile(prescription.Filename);
 

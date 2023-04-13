@@ -94,13 +94,17 @@ public class DatabaseService : IDatabaseService
         return _data;
     }
 
-    public UserDTO? GetUserById(int id, bool extendedUser = false)
+    public UserDTO? GetUserById(int id, bool returnExtendedObject=false)
     {
         UserDTO? user = _userIds.ContainsKey(id) ? _userIds[id] : null;
-        if (extendedUser || user == null)
+        if (returnExtendedObject || user == null)
+        {
             return user;
+        }
         else
+        {
             return user.Prune();
+        }
     }
 
     public UserDTO? GetUserByUsername(string username)

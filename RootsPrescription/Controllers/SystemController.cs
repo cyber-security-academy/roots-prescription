@@ -13,12 +13,15 @@ namespace RootsPrescription.Controllers;
 
 
 
-[Route("api/[controller]/[action]")]
+[Route("[controller]/[action]")]
 [ApiController]
 public class SystemController : ControllerBase
 {
-    public SystemController()
+    private readonly ILogger<SystemController> _logger;
+
+    public SystemController(ILogger<SystemController> logger)
     {
+        _logger = logger;
     }
 
     [AllowAnonymous]
@@ -27,6 +30,7 @@ public class SystemController : ControllerBase
     public ActionResult<string> Ping()
     {
         const string message = "--CHANGE ME--";
+        _logger.LogInformation(message);
 
         return message;
     }
