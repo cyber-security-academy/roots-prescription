@@ -7,18 +7,18 @@ La oss starte med å lese loggene til applikasjonen vår.
 Vi anbefaler at en i gruppa setter maskinen sin på storskjerm slik at vi jobber sammen som et team.
 
 1. Gå til https://splunk.csa.datasnok.no/en-GB/
-2. Logg inn med brukernavn og passord `admin:Superhemmelig2022`
+2. Logg inn med brukernavn og passord: `groupN:unloving backspace mooing puma`. Bytt `N` med gruppenummeret dere fikk utdelt.
 3. Trykk på "Search & Reporting" på venstre side, et grønt ikon
-4. Skriv `* index="group_N"` i søkefeltet. Bytt `N` med gruppenummeret dere har fått utdelt.
+4. Skriv `index="group_N"` i søkefeltet. Bytt `N` med gruppenummeret dere har fått utdelt.
 5. Du skal nå se loggene til din applikasjon. Får du ikke opp noen ting, si ifra til kursholderne. 
 
 #### Søk
-Nå som dere har oppe loggene, er det på tide å gjøre litt forskjelige søk. 
+Nå som dere har oppe loggene, er det på tide å gjøre litt forskjellige søk. 
 Test disse søkene og lek dere litt i Splunk.
 
-* `* index="group_N" `
-* `* index="group_N" Resept`
-* `* index="group_N" Fakt*`
+* `index="group_N" `
+* `index="group_N" Resept`
+* `index="group_N" Fakt*`
 
 #### Oversikt
 Se "Fields" på venstre side, klikk på `MessageTemplate` og `RenderedMessage` for å se oversikt over antallet meldinger.
