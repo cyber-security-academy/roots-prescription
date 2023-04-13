@@ -5,7 +5,7 @@ namespace RootsPrescription.Database;
 public interface IDatabaseService
 {
     UserDTO[]? GetAllUsers();
-    UserDTO? GetUserById(int userid, bool returnExtendedObject = false);
+    UserDTO? GetUserById(int userid, bool extendedUser = false);
     UserDTO? GetUserByUsername(string username);
     UserDTO? GetUserByNationalId(string nationalId);
     InvoiceDTO? GetInvoice(int id);

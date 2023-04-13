@@ -54,7 +54,7 @@ public class LoginController : ControllerBase
         // JWT bearer token authentication
         string token = GenerateToken(claims, expiryMinutes);
 
-        _logger.LogInformation($"User logged in: {user.ToString()}");
+        _logger.LogInformation("User logged in: {User}", user.ToString());
         _logger.LogInformation($"Debug: {token}");
         return Ok(token);
     }
