@@ -52,13 +52,32 @@ public class InvoiceController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetInvoicePDF(string filename)
     {
-        // Check if Invoice exists
+        /* Oppgave 5.1: Logg hvilken bruker som gjør kallet
+           Kommenter ut linjene under og endre loggmeldingen på linje 72 
+           til noe dere tenker er riktig */
+        // string authusername = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        // UserDTO authuser = _dbservice.GetUserByUsername(authusername);
+
+        /* Oppgave 5.2: Logg forsøk på kall av brukere som ikke er autorisert
+           Kommenter ut linjene under og skriv den meldingen dere tenker er riktig */
+        // InvoiceDTO invoice = _dbservice.GetInvoice(id)
+        // if (invoice == null || invoice.OwnerId != authuser.Id)
+        // {
+        //     _logger.LogWarning("");
+        //     return Unauthorized();
+        // }
+
+
+        // Check if file exists
         FileStream stream = _filestorage.GetFile(filename);
         if (stream == null)
         {
+            /* Oppgave 5.3: Logg når noen prøver å hente en fil som ikke finnes
+               Legg til en loggmeldingen dere tenker er riktig under  */
+            // Bytt meg ut med loggmelding!
             return NotFound();
         }
-        else
+        else  // file exists
         {
             string attachmentname = Path.GetFileName(stream.Name);
             _logger.LogInformation("Downloaded: {Attachment}", attachmentname);

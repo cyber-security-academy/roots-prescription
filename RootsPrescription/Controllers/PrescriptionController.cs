@@ -66,15 +66,14 @@ public class PrescriptionController : ControllerBase
             return Unauthorized();
         }
 
+        // Check if file exists
         FileStream stream = _filestorage.GetFile(prescription.Filename);
-
-        // Respond
         if (stream == null)
         {
             _logger.LogWarning("The prescription #{Id} ({Filename}) was not found in the file archive", id, prescription.Filename);
             return NotFound();
         }
-        else
+        else  // file exists
         {
             string attachmentname = Path.GetFileName(stream.Name);
             _logger.LogInformation("Downloaded: {Attachment}", attachmentname);
