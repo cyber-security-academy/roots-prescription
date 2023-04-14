@@ -1,6 +1,5 @@
 # Roots Apotek - Microservice for resepter
 
-## Introduksjon
 Velkommen til dag to av kurset. I dag tar dere rollen som utviklere! 
 Applikasjonen dere ble presentert for på dag 1 skal vi nå utvikle videre på.
 
@@ -11,7 +10,7 @@ Roots Apotek fikk en melding om at deres resepter var på avveie. Kilden var en 
 
 Etter en sikkerhetsgjennomgang er det avdekket at loggene må ryddes opp i. Dette er dere i Sopra Steria hyret inn for å løse.
 
-Dere kan begynne på [oppgaven om trusselmodellering](Oppgaver/1_trusselmodellering.md). Vi anbefaler å løse en og en oppgave, i rekkefølgen som oppgaveteksten linker til.  
+Dere kan begynne på [oppgaven om trusselmodellering](Oppgaver/0_trusselmodellering.md). Vi anbefaler å løse en og en oppgave, i rekkefølgen som oppgaveteksten linker til.  
 
 > Alle oppgavene er lagt opp slik at man kun trenger nettleseren for å løse dem.
 > Vanligvis vil utviklere bruke en teksteditor som Visual Studio Code eller
