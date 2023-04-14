@@ -4,8 +4,6 @@ Vi har blitt ansatt til å rette opp i loggene. Da må vi først gjøre oss kjen
 logg-verktøyet som kunden bruker, Splunk.
 La oss starte med å lese loggene til applikasjonen vår. 
 
-Vi anbefaler at en i gruppa setter maskinen sin på storskjerm slik at vi jobber sammen som et team.
-
 1. Gå til https://splunk.csa.datasnok.no/en-GB/
 2. Logg inn med brukernavn og passord: `groupN:unloving backspace mooing puma`. Bytt `N` med gruppenummeret dere fikk utdelt.
 3. Trykk på "Search & Reporting" på venstre side, et grønt ikon
@@ -34,4 +32,3 @@ For å slippe å trykke 'Søk' hele tiden for å se nye loggmeldinger, kan man e
 Det er mye man kan filtrere på og sjekke i Splunk, men vi kan ikke bruke hele dagen på dette. 
 
 Du kan nå gå videre til neste oppgave, [første kodeendring](./3_ping.md)!
-
