@@ -20,11 +20,11 @@ namespace RootsPrescription.Controllers;
 public class LoginController : ControllerBase
 {
     private readonly IConfiguration _config;
-    private readonly ILogger<PrescriptionController> _logger;
+    private readonly ILogger<LoginController> _logger;
     private readonly IDatabaseService _dbservice;
     private const string _DUMMY_PASSWORD_HASH_ = "Rfc2898DeriveBytes$50000$N0GUkDVktle2QHUiortgZw==$Q8mijJ2JTMhAtuCf4indiaXZKQe6XWLUjLyxnuyl8Gg=";
 
-    public LoginController(IConfiguration config, ILogger<PrescriptionController> logger, IDatabaseService dbservice)
+    public LoginController(IConfiguration config, ILogger<LoginController> logger, IDatabaseService dbservice)
     {
         _config = config;
         _logger = logger;
