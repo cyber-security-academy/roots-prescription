@@ -55,7 +55,6 @@ public class LoginController : ControllerBase
         string token = GenerateToken(claims, expiryMinutes);
 
         _logger.LogInformation("User logged in: {User}", user.ToString());
-        _logger.LogInformation($"Debug: {token}");
         return Ok(token);
     }
 
