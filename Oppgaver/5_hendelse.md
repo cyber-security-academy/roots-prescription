@@ -5,6 +5,13 @@
 ... teamet som håndterer hendelser i organisasjonen. De har gjerne oversikt over alle systemer og deres logger. Blir et system angrepet, er det de som undersøker hva som har skjedd. 
 </details><br>
 
+### Hva skjer nå?
+- Hvis dere allerede har oppdaget unormal trafikk i loggene, ta kontakt med IRT hos Roots Apotek. *(dvs Marit og Vegard)*
+  - Lag en Teams-chat med alle dere i gruppen, og inkluder Marit TOKLE og Vegard BAKKE.
+- Hvis IRT har kontaktet dere, sjekk loggene i Splunk
+  - Opprett Teams-chat som over, og bekreft til IRT at dere ser unormale hendelser i loggene
+
+
 Denne oppgaven kommer i 3 steg. Det er lurt å gjør stegene etter hverandre og deploye til prod mellom hver gang. Dette er en litt mer komplisert oppgave enn tidligere, ikke nøl med å spørre om hjelp!
 
 ---
