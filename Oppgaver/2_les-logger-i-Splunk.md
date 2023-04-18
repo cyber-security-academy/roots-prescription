@@ -2,6 +2,7 @@
 
 Vi har blitt ansatt til å rette opp i loggene. Da må vi først gjøre oss kjent med 
 logg-verktøyet som kunden bruker, Splunk.
+
 La oss starte med å lese loggene til applikasjonen vår. 
 
 1. Gå til https://splunk.csa.datasnok.no/en-GB/
