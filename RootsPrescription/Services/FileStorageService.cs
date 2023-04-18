@@ -42,8 +42,6 @@ public class FileStorageService : IFileStorageService
         }
     }
 
-
-
     protected void Initialize()
     {
         _initialized = InitFileStorage(_dbservice);
@@ -69,7 +67,6 @@ public class FileStorageService : IFileStorageService
             BuildFileArchive(_filearchivepath, dbhash, users);
         } 
         return dbhash;
-        
     }
 
     private bool MatchesFolderHash(string dbhash)
