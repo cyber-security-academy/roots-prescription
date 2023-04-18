@@ -10,4 +10,4 @@ Vi anbefaler at en i gruppa setter maskinen sin på storskjerm gjennom alle oppg
 [Tabell fra skjemaet i presentasjonen - kanskje det til og med ligger en kopi i repoene som er klar til å fylles ut?]
 
 ### Neste oppgave
-Når dere har skrevet ferdig, gå videre til [oppgave 2](./1_swagger.md)!
+Når dere har skrevet ferdig, kan dere se på selve [e-resept microservicen](./1_swagger.md)!
