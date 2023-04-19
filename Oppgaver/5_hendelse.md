@@ -51,7 +51,7 @@ Legg til endringene i produksjonsmiljøet. Fortsett på steg 3, men husk å sjek
 For å logge dersom brukeren som er logget inn ikke er eieren til en faktura, kan dere bruke følgende kode:
 
 ```csharp
-InvoiceDTO invoice = _dbservice.GetInvoice(id)
+InvoiceDTO invoice = _dbservice.GetInvoice(id);
 if (invoice == null || invoice.OwnerId != authuser.Id)
 {
     _logger.LogWarning("");  // Din loggmelding
