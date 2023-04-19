@@ -49,6 +49,7 @@ Første del av if-setningen under viser når filen ikke finnes. Inne i den blokk
 ```csharp
 if (stream == null)  // file does not exist
 {
+    // Deres loggmelding her
     return NotFound();
 }
 else  // file exists
@@ -81,9 +82,9 @@ Legg til endringene i produksjonsmiljøet. Fortsett på neste steg, men husk å 
 <details>
 <summary>Kodetips!💡</summary>
 For å logge dersom brukeren som er logget inn ikke er eieren til en faktura, kan dere bruke følgende kode:
-
+    
 ```csharp
-InvoiceDTO invoice = _dbservice.GetInvoice(id);
+InvoiceDTO invoice = _dbservice.GetInvoice(filename);
 if (invoice == null || invoice.OwnerId != authuser.Id)
 {
     _logger.LogWarning("");  // Din loggmelding
