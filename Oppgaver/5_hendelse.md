@@ -97,6 +97,7 @@ else  // file exists
 
 ### Steg 4: Oppsummer valgene dere har tatt i oppsummeringspresentasjonen (15 minutter)
 Bruk litt tid på å oppsummere valgene dere har gjort. Disse presenteres på oppsummeringsdagen.
+Er det noe annet dere tenker dere kunne lagt til for at loggene blir enda bedre for hendelseshåndtering?
 
 ## Neste oppgave
 Neste oppgave er en [bonusoppgave](./6_fiks_s%C3%A5rbarheten.md)!
