@@ -6,7 +6,7 @@ Det skal vi bruke nå!
 
 ### 1) Lokaliser din gruppe sitt API
 - Gå til https://csa-gr[GRUPPENUMMER]-app.azurewebsites.net/swagger. *Husk å bytte ut `[GRUPPENUMMER]`, f.eks. `csa-gr9-app`*
-- Gå til `System`-kontrolleren, kjør Execute på `/System/Ping`, og du bør motta en *respons* `-- CHANGE ME--`.
+- Gå til `System`-kontrolleren, kjør "Execute" på `/System/Ping`, og du bør motta en *respons* `-- CHANGE ME--`.
 
 ### 2) Logg på
 - Åpne `/Login/Login`, logg inn med en av:
@@ -24,8 +24,8 @@ Det skal vi bruke nå!
 - Hent ut informasjon om brukeren med `/Login/CurrentUser`
 
 ### 3) Last ned en resept
-- Finn info om *dine* resepter: `/Prescription/GetMyPrescriptions`
-- Finn ID til en resept, og bruk denne for å laste ned den vha `/Prescription/GetPdf`
+- Finn info om *dine* resepter i `/Prescription/GetMyPrescriptions`. Noter deg en av IDene.
+- Bruk IDen for å laste ned PDFen den via `/Prescription/GetPdf`. Legg inn IDen i `id`-feltet før du trykker "Execute". 
 - Hvis du klarte å laste ned en PDF vil du få følgende respons:
 
   ![image](https://user-images.githubusercontent.com/4437745/231814072-8371b082-f4b5-4ef9-8a24-daa5f61c01f4.png)
