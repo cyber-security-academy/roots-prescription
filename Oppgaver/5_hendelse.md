@@ -38,7 +38,7 @@ Dere kan også se på funksjonen over, `GetMyInvoices()` for inspirasjon. [Linje
 ### Steg 2: Prøver noen å hente en fil som ikke finnes? (15 minutter)
 Esra i utviklingsteamet spør IRT om de ikke burde logge forsøk på filer som ikke finnes. 
 IRT er _helt_ enig! De gir dere kravet å logge **forsøk på å laste ned filer som ikke finnes, og hvem som gjør kallet**.
-Dette skjer i samme funksjon som i steg 1 og 2, GetInvoicePDF().
+Dette skjer i samme funksjon som i steg 1, GetInvoicePDF().
 
 Legg til endringene i produksjonsmiljøet. Sjekk loggene i Splunk. Når det er klart kan dere gå videre.
 
