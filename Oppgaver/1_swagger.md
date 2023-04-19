@@ -11,7 +11,7 @@ Det skal vi bruke nå!
 ### 2) Logg på
 - Åpne `/Login/Login`, logg inn med en av:
   - Brukere: `ada`, `bob`, `camilla`, `dilan` , `eira`
-  - Passord: `csa+admin`  *(Likt for alle brukere)*
+  - Passord: `Superhemmelig1337`  *(Likt for alle brukere)*
 - Hvis du klarte å logge på, vil du få en slik respons i Swagger:
 
   ![image](https://user-images.githubusercontent.com/4437745/231814625-7bad51d0-ed19-4efb-897e-149d8fae0bd5.png)
