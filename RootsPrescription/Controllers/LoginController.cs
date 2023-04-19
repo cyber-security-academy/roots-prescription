@@ -31,7 +31,6 @@ public class LoginController : ControllerBase
         _dbservice = dbservice;
     }
 
-
     [AllowAnonymous]
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -71,7 +70,6 @@ public class LoginController : ControllerBase
         return Ok(authuser);
     }
 
-
     // Workaround endpoint to mimick a 401 Unaothorized when .Net authorization cookie is missing
     [ApiExplorerSettings(IgnoreApi = true)]
     [AllowAnonymous]
@@ -99,7 +97,6 @@ public class LoginController : ControllerBase
                 authProperties);
 
     }
-
 
     //To authenticate user
     private UserDTO? Authenticate(string username, string password)
@@ -140,7 +137,6 @@ public class LoginController : ControllerBase
             claims,
             expires: DateTime.Now.AddMinutes(expiryMinutes),
             signingCredentials: credentials);
-
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
