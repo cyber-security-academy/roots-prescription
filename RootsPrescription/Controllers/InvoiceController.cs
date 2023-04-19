@@ -23,7 +23,6 @@ public class InvoiceController : ControllerBase
         _dbservice = dbservice;
     }
 
-
     [Authorize]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -44,8 +43,6 @@ public class InvoiceController : ControllerBase
             return Ok(invoices);
         }
     }
-
-
     
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -67,6 +64,5 @@ public class InvoiceController : ControllerBase
             Response.Headers.Add("X-Content-Type-Options", "nosniff");
             return new FileStreamResult(stream, "application/pdf");
         }
-
     }
 }

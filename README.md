@@ -13,6 +13,9 @@ Etter sikkerhetsgjennomgangen er det avdekket at loggene må ryddes opp i. Dette
 ## Første oppgave
 Dere kan begynne på [oppgaven om trusselmodellering](Oppgaver/0_trusselmodellering.md). Vi anbefaler at dere løser én og én oppgave, i den rekkefølgen som oppgavetekstene legger opp til.  
 
+> Vi anbefaler at en i gruppa setter maskinen sin på storskjerm gjennom alle 
+> oppgavene slik at vi jobber sammen som et team.
+>
 > Alle oppgavene er lagt opp slik at man kun trenger nettleseren for å løse dem.
 > Vanligvis vil utviklere bruke en teksteditor som Visual Studio Code eller
 > IntelliJ, men det trenger dere ikke i dag.
