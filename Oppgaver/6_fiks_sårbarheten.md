@@ -5,4 +5,6 @@ foregår i loggene. Om dere ønsker kan dere nå forsøke å fikse sårbarheten 
 
 Er det vanskelig å forstå hva som foregår? Spør IRT-teamet om hjelp!
 
+Fant dere noe? Ta det med i oppsummeringen!
+
 [Gå tilbake til forrige oppgave](./4_fiks-loggmeldingen.md)
