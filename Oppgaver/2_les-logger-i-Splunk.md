@@ -36,9 +36,6 @@ Klikk på `RenderedMessages`.  I popup-vinduet som kommer opp, så kan man under
 Ignorer grafen, men fokuser på den grå tabellen under. Den er sortert med de færreste forekomstene øverst. 
 
 
-
-
-
 ### Neste oppgave
 Det er mye man kan filtrere på og sjekke i Splunk, men vi kan ikke bruke hele dagen på dette. Du kan nå gå videre til neste oppgave, [første kodeendring](./3_ping.md)!
 
