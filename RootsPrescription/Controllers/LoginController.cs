@@ -66,7 +66,6 @@ public class LoginController : ControllerBase
 
         UserDTO authuser = _dbservice.GetUserByUsername(authusername);
 
-
         return Ok(authuser);
     }
 
@@ -95,7 +94,6 @@ public class LoginController : ControllerBase
             CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
-
     }
 
     //To authenticate user
