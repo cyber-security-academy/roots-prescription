@@ -109,6 +109,8 @@ public class DatabaseService : IDatabaseService
 
     public UserDTO? GetUserByUsername(string username)
     {
+        if (username == null) return null;
+
         username = username.ToLower().Trim();
         UserDTO? user = _userNames.ContainsKey(username) ? _userNames[username] : null;
         return user == null ? null : user.Prune();
@@ -140,6 +142,11 @@ public class DatabaseService : IDatabaseService
         {
             return null;
         }
+    }
+
+    public InvoiceDTO? GetInvoice(string filename)
+    {
+        return _invoices.FirstOrDefault(x => x.Value.Filename == filename).Value;
     }
 
     public PrescriptionDTO[]? GetUserPrescriptions(int userid)
