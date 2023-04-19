@@ -36,7 +36,7 @@ Microservicen for resepter består av 3 *controllere* (Login, Prescriptions og I
 
 ```mermaid
 graph RL;
-Login("<b><u>Login Controller</u></b><br/>/Login/Login")
+Login("<b><u>Login Controller</u></b><br/>/Login/Login<br/>/Login/CurrentUser")
 Invoice("<b><u>Invoice</u></b><br/>/Invoice/GetMyInvoices<br/>/Invoice/GetInvoicePDF")
 Prescription("<b><u>Prescription</u></b><br/>/Prescription/GetMyPrescriptions<br/>/Prescription/GetPDF")
 
