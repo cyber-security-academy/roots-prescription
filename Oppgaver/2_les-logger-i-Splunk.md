@@ -28,6 +28,13 @@ Se "Fields" på venstre side, klikk på `MessageTemplate` og `RenderedMessage` f
 For å slippe å trykke 'Søk' hele tiden for å se nye loggmeldinger, kan man endre til real-time oppdatering til venstere for Søkeknappen.  \
 ![image](https://user-images.githubusercontent.com/4437745/230628582-4c503ee0-f3df-4ca0-b5e3-8ffe92484ba3.png)
 
+#### Avvikere
+For å identifisere avvik i loggene (tegn på unormal aktivitet), så kan man bruke Splunk for å finne *sjeldne verdier*.
+
+Klikk på `RenderedMessages`.  I popup-vinduet som kommer opp, så kan man under `Reports` velge `Rare values`.
+
+Ignorer grafen, men fokuser på den grå tabellen under. Den er sortert med de færreste forekomstene øverst. 
+
 
 ### Neste oppgave
 Det er mye man kan filtrere på og sjekke i Splunk, men vi kan ikke bruke hele dagen på dette. Du kan nå gå videre til neste oppgave, [første kodeendring](./3_ping.md)!
