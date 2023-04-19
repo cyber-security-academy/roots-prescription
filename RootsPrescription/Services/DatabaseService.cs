@@ -109,6 +109,8 @@ public class DatabaseService : IDatabaseService
 
     public UserDTO? GetUserByUsername(string username)
     {
+        if (username == null) return null;
+
         username = username.ToLower().Trim();
         UserDTO? user = _userNames.ContainsKey(username) ? _userNames[username] : null;
         return user == null ? null : user.Prune();

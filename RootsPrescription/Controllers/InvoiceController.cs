@@ -44,6 +44,7 @@ public class InvoiceController : ControllerBase
         }
     }
     
+    [Authorize]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -53,9 +54,9 @@ public class InvoiceController : ControllerBase
         UserDTO authuser = _dbservice.GetUserByUsername(authusername);
     
         InvoiceDTO invoice = _dbservice.GetInvoice(filename);
-        if (invoice == null || invoice.OwnerId != authuser.Id)
+        if (invoice == null || authuser == null || invoice.OwnerId != authuser.Id)
         {
-            _logger.LogWarning("Unauthorized attempt. User '{User}' tried to fetch invoice '{invoice}'", authuser.Id, invoice.Id);  // Din loggmelding
+            _logger.LogWarning("Unauthorized attempt. User '{User}' tried to fetch invoice '{invoice}'", authuser?.Id, invoice?.Id);  // Din loggmelding
             return Unauthorized();  // Returner med statuskode 401
         }
     
