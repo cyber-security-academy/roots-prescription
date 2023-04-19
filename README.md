@@ -1,17 +1,11 @@
-# Roots Apotek - e-resept
+# Roots Apotek - eResept
 
-Velkommen til dag to av kurset. I dag tar dere rollen som utviklere! 
-Applikasjonen dere ble presentert for på Dag 1 skal vi nå utvikle videre på.
+Velkommen til dag to av kurset. I dag tar dere rollen som utviklere! Først, la oss gå gjennom hva som har skjedd.
 
-Først, la oss gå gjennom hva som har skjedd.
-Roots Apotek fikk en melding om at deres resepter var på avveie. Kilden var en av microservicene "e-resept" for nedlasting av PDFer for resepter og faktura. De fant ut at det var mulig å for innloggede brukere å laste ned andres resepter gjennom URLen `/Prescription/GetPdf`. 
+Roots Apotek fikk en melding om at kundenes resepter var på avveie. Kilden var en av microservicene, eResept, for nedlasting av PDFer for resepter og faktura. De fant ut at det var mulig å for innloggede brukere å laste ned andres resepter gjennom URLen `/Prescription/GetPdf`. 
+Sårbarheten lå i funksjonen `GetPdf()` i controlleren [`PrescriptionController.cs`](RootsPrescription/Controllers/PrescriptionController.cs). Hullet er nå tettet og dere kan anta at funksjonen er sikker.
 
-Årsaken til sårbarheten ble identifisert. Sårbarheten lå på i funksjonen [GetPdf](RootsPrescription/Controllers/PrescriptionController.cs#L51-L85) i controlleren `PrescriptionController.cs`. Hullet er nå tettet og dere kan anta at funksjonen er sikker.
-
-Etter sikkerhetsgjennomgangen er det avdekket at loggene må ryddes opp i. Dette er dere i Sopra Steria hyret inn for å løse.
-
-## Første oppgave
-Dere kan begynne på [oppgaven om trusselmodellering](Oppgaver/0_trusselmodellering.md). Vi anbefaler at dere løser én og én oppgave, i den rekkefølgen som oppgavetekstene legger opp til.  
+Etter sikkerhetsgjennomgangen er det avdekket at loggene må ryddes opp i. Dette er dere i Sopra Steria hyret inn for å løse. Begynn på [oppgaven om trusselmodellering](Oppgaver/0_trusselmodellering.md).
 
 > Vi anbefaler at en i gruppa setter maskinen sin på storskjerm gjennom alle 
 > oppgavene slik at vi jobber sammen som et team.
@@ -28,7 +22,7 @@ Dere kan begynne på [oppgaven om trusselmodellering](Oppgaver/0_trusselmodeller
 ## Arkitektur
 Roots Apoteks har eksportert en mappe med PDFer (resepter og faktura) fra det gamle fagsystemet sitt slik kunden kan få tilgang til sine dokumenter. PDFene ligger lagert i en beskyttet mappe som kun en systembrukeren har tilgang til. 
 
-De har laget en mikroservice *e-resept* som tilbyr resepter og fakturakopi til kundene på internett.
+De har laget en mikroservice, *eResept*, som tilbyr resepter og fakturakopi til kundene på internett.
 
 Microservicen for resepter består av 3 *controllere* (Login, Prescriptions og Invoice) som tilbyr URLer, og 2 *servicer* (FileStorage og Database).
 
