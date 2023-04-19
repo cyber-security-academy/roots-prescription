@@ -30,9 +30,7 @@ Roots Apoteks har eksportert en mappe med PDFer (resepter og faktura) fra det ga
 
 De har laget en mikroservice *e-resept* som tilbyr resepter og fakturakopi til kundene på internett.
 
-Microservicen for resepter består av 3 *controllere* (Login, Prescriptions og Invoice) som tilbyr URLer, og 2 *servicer* (FileStorage og Database), og som snakker med back-end.
-
-
+Microservicen for resepter består av 3 *controllere* (Login, Prescriptions og Invoice) som tilbyr URLer, og 2 *servicer* (FileStorage og Database).
 
 ```mermaid
 graph RL;
@@ -58,8 +56,5 @@ Her er en liten kort forklaring på noen av dem slik de er brukt hos Roots Apote
 - *Endepunkt* - Et fancy ord for URL (men vanligvis for URLer der det skjer noe på serveren når noen besøker URLen)
 - *API* - En samling URLer (*endepunkter*) som er strukturert slik at maskiner lettere kan snakke sammen. (*Application programming interface* eller *grensesnitt*)
 - *Controller* - En del av systemet som har regler om hvordan ting skal utføres. *Endepunkter* samles gjerne i en eller flere *controllere*
-- *Service* - I denne sammenhengen er *service* den delen av systemet som "leverer tjenester" til *controllerne*. F.eks. henter og skriver data fra databasen, henter filer fra mapper, e.l.
-- *Microservice* - Har ingenting med *service* å gjøre. Nå zoomer vi ut noen hakk, og ser alle IT-tjenestene til hele Roots Apotek. De kunne ha samlet alle disse en én stor maskin, eller de kan dele tjeneste opp i mindre maskiner som snakker sammen. Disse småmaskinene kalles *micro*-servicer.
-- *Front-end* - Samme som resepsjonen, salgslokalet og utstillinger som kundene ser
-- *Back-end* - Samme som *backoffice*
-
+- *Service* - I *denne* sammenhengen er *service* den delen av systemet som "leverer tjenester" til *controllerne*. F.eks. henter og skriver data fra databasen, henter filer fra mapper, e.l.
+- *Microservice* - Har ingenting med *service* som i punktet over å gjøre. Nå zoomer vi ut noen hakk, og ser alle IT-tjenestene til hele Roots Apotek. De kunne ha samlet alle disse en én stor maskin, eller de kan dele tjeneste opp i mindre maskiner som snakker sammen. Disse småmaskinene kalles *micro*-servicer.
