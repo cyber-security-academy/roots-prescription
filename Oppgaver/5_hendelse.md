@@ -35,35 +35,7 @@ Dere kan også se på funksjonen over, `GetMyInvoices()` for inspirasjon. [Linje
 
 ---
 
-### Steg 2: Er det en uautorisert bruker som gjør kallet? (15 minutter)
-Dere ser unormal aktivitet i loggene! Å nei! 
-Det er på tide at dere tar kontakt med IRT og forteller hva dere har sett! 
-(Skriv i Teams-kanalen deres og tag Vegard og Marit). 
-I tillegg til svaret dere fikk, har dere fått et nytt krav. 
-Kravet er å logge **forsøk på kall av brukere som ikke er autorisert til å gjøre kallet** i samme funksjon som i steg 1, GetInvoicePDF().
-
-Et eksempel på en som ikke er autorisert er en bruker som er autentisert (innlogget), men ikke eier PDFen som kallet prøver å hente ut.
-
-Legg til endringene i produksjonsmiljøet. Fortsett på steg 3, men husk å sjekke loggene i Splunk når endringene er deployet til produksjonsmiljøet.
-
-<details>
-<summary>Kodetips!💡</summary>
-For å logge dersom brukeren som er logget inn ikke er eieren til en faktura, kan dere bruke følgende kode:
-
-```csharp
-InvoiceDTO invoice = _dbservice.GetInvoice(id);
-if (invoice == null || invoice.OwnerId != authuser.Id)
-{
-    _logger.LogWarning("");  // Din loggmelding
-    return Unauthorized();  // Returner med statuskode 401
-}
-```
-
-</details><br>
-
----
-
-### Steg 3: Prøver noen å hente en fil som ikke finnes? (15 minutter)
+### Steg 2: Prøver noen å hente en fil som ikke finnes? (15 minutter)
 Esra i utviklingsteamet spør IRT om de ikke burde logge forsøk på filer som ikke finnes. 
 IRT er _helt_ enig! De gir dere kravet å logge **forsøk på å laste ned filer som ikke finnes, og hvem som gjør kallet**.
 Dette skjer i samme funksjon som i steg 1 og 2, GetInvoicePDF().
@@ -88,6 +60,34 @@ else  // file exists
     Response.Headers.Add("Content-Disposition", $"attachment; filename=\"{attachmentname}\"");
     Response.Headers.Add("X-Content-Type-Options", "nosniff");
     return new FileStreamResult(stream, "application/pdf");
+}
+```
+
+</details><br>
+
+---
+
+### Steg 3: Er det en uautorisert bruker som gjør kallet? (15 minutter)
+Dere ser unormal aktivitet i loggene! Å nei! 
+Det er på tide at dere tar kontakt med IRT og forteller hva dere har sett! 
+(Skriv i Teams-kanalen deres og tag Vegard og Marit). 
+I tillegg til svaret dere fikk, har dere fått et nytt krav. 
+Kravet er å logge **forsøk på kall av brukere som ikke er autorisert til å gjøre kallet** i samme funksjon som i steg 1, GetInvoicePDF().
+
+Et eksempel på en som ikke er autorisert er en bruker som er autentisert (innlogget), men ikke eier PDFen som kallet prøver å hente ut.
+
+Legg til endringene i produksjonsmiljøet. Fortsett på neste steg, men husk å sjekke loggene i Splunk når endringene er deployet til produksjonsmiljøet.
+
+<details>
+<summary>Kodetips!💡</summary>
+For å logge dersom brukeren som er logget inn ikke er eieren til en faktura, kan dere bruke følgende kode:
+
+```csharp
+InvoiceDTO invoice = _dbservice.GetInvoice(id);
+if (invoice == null || invoice.OwnerId != authuser.Id)
+{
+    _logger.LogWarning("");  // Din loggmelding
+    return Unauthorized();  // Returner med statuskode 401
 }
 ```
 
