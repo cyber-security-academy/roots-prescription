@@ -128,6 +128,20 @@
         "Name": "Eira Eide",
         "NationalIdNumber": "12051299999",
         "PostalAddress": "Elvefaret 55"
+    },
+    {
+        "Id": 608,
+        "UserName": "fridan",
+        "Name": "Fridan Friis",
+        "NationalIdNumber": "22021299999",
+        "PostalAddress": "Frostveien 16"
+    },
+    {
+        "Id": 806,
+        "UserName": "hel",
+        "Name": "Hel Haug",
+        "NationalIdNumber": "22039699999",
+        "PostalAddress": "Havna 18"
     }
 
 ]
