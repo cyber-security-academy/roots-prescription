@@ -37,7 +37,7 @@ Dere kan også se på funksjonen over, `GetMyInvoices()` for inspirasjon. [Linje
 
 ### Steg 2: Er det en uautorisert bruker som gjør kallet? (15 minutter)
 Dere ser unormal aktivitet i loggene! Å nei! 
-Det er på tide at dere tar kontakt med IRT-teamet og forteller hva dere har sett! 
+Det er på tide at dere tar kontakt med IRT og forteller hva dere har sett! 
 (Skriv i Teams-kanalen deres og tag Vegard og Marit). 
 I tillegg til svaret dere fikk, har dere fått et nytt krav. 
 Kravet er å logge **forsøk på kall av brukere som ikke er autorisert til å gjøre kallet** i samme funksjon som i steg 1, GetInvoicePDF().
