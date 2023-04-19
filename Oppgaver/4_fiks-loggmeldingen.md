@@ -2,11 +2,10 @@
 
 ### Programmeringsoppgave (10-15 minutter)
 Hjelp! Personvernombudet i Roots Apotek har sagt at vi ikke kan logge persondata. 
-Vi logger jo bl.a. personnummer i loggmeldingen `User logged in:` i filen [LoginController](/RootsPrescription/Controllers/LoginController.cs)!
+Vi logger jo bl.a. personnummer i loggmeldingen `User logged in:` i filen [LoginController](/RootsPrescription/Controllers/LoginController.cs)! 
 
-Kan dere finne loggmeldingene i Splunk?
-
-Personvernombudet har bedt om at det ikke skal logges persondata. Fiks dette og deploy endringen til produksjonsmiljøet. 
+1. Finn loggmeldingen i Splunk
+2. Fjern personnummer fra loggmeldingen i koden og deploy endringen til produksjonsmiljøet 
 
 > Tips! Deploy endringene til produksjonsmiljøet slik som i forrige oppgave.
 
