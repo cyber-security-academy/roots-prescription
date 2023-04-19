@@ -1,4 +1,5 @@
 ﻿namespace RootsPrescription.Models;
+
 public class InvoiceDTO
 {
     public int Id { get; set; }

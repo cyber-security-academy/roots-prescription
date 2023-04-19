@@ -23,7 +23,6 @@ public class InvoiceController : ControllerBase
         _dbservice = dbservice;
     }
 
-
     [Authorize]
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
@@ -44,21 +43,18 @@ public class InvoiceController : ControllerBase
             return Ok(invoices);
         }
     }
-
-
     
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetInvoicePDF(string filename)
     {
-        // Check if Invoice exists
         FileStream stream = _filestorage.GetFile(filename);
-        if (stream == null)
+        if (stream == null)  // file does not exist
         {
             return NotFound();
         }
-        else
+        else  // file exists
         {
             string attachmentname = Path.GetFileName(stream.Name);
             _logger.LogInformation("Downloaded: {Attachment}", attachmentname);
@@ -68,6 +64,5 @@ public class InvoiceController : ControllerBase
             Response.Headers.Add("X-Content-Type-Options", "nosniff");
             return new FileStreamResult(stream, "application/pdf");
         }
-
     }
 }

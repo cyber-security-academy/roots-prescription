@@ -1,4 +1,4 @@
-# Ping! Noens første pull request?
+# Introduksjonsoppgave: Ping! Noens første pull request?
 
 <details>
 <summary>En "pull request" er...</summary>
@@ -33,6 +33,7 @@ for å gjøre dere litt varme i trøya slik at dere kan det grunnleggende.
 - Sjekk endringen i Splunk. Kan dere se den nye meldingen?
 
 
-### Neste oppgave
+## Neste oppgave
 Det er bra dere er litt varme i trøya nå, for personvernekspertene i Roots Apotek har en [oppgave til dere](./4_fiks-loggmeldingen.md)!
 
+[Gå tilbake til forrige oppgave](./2_les-logger-i-Splunk.md)

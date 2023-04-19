@@ -1,10 +1,9 @@
-# Les logger i Splunk (10-15 minutter)
+# Introduksjonsoppgave: Les logger i Splunk (10-15 minutter)
 
 Vi har blitt ansatt til å rette opp i loggene. Da må vi først gjøre oss kjent med 
 logg-verktøyet som kunden bruker, Splunk.
-La oss starte med å lese loggene til applikasjonen vår. 
 
-Vi anbefaler at en i gruppa setter maskinen sin på storskjerm slik at vi jobber sammen som et team.
+La oss starte med å lese loggene til applikasjonen vår. 
 
 1. Gå til https://splunk.csa.datasnok.no/en-GB/
 2. Logg inn med brukernavn og passord: `groupN:unloving backspace mooing puma`. Bytt `N` med gruppenummeret dere fikk utdelt.
@@ -31,7 +30,6 @@ For å slippe å trykke 'Søk' hele tiden for å se nye loggmeldinger, kan man e
 
 
 ### Neste oppgave
-Det er mye man kan filtrere på og sjekke i Splunk, men vi kan ikke bruke hele dagen på dette. 
+Det er mye man kan filtrere på og sjekke i Splunk, men vi kan ikke bruke hele dagen på dette. Du kan nå gå videre til neste oppgave, [første kodeendring](./3_ping.md)!
 
-Du kan nå gå videre til neste oppgave, [første kodeendring](./3_ping.md)!
-
+[Gå tilbake til forrige oppgave](./1_swagger.md)
