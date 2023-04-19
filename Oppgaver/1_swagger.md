@@ -18,7 +18,7 @@ Det skal vi bruke nå!
   
   <details>
     <summary>Respons-tokenet eyJhbG...</summary>
-    <p>Den lange responsen her (som starter med 'eyJhbG...') kalles et `token`, og fungerer som en tivolibillett. Den slipper deg inn på anlegget, og gir deg lov til å kjøre noen av karusellene, man kanskje ikke alle. </p><p>Kanskje får dere ulike farger på billettene avhengig av alder eller høyde. Hver billettkontrollør kan da lett sjekke om du får lov å kjøre karusselen uten å ringe billettselgeren for flere detaljer. </p><p><i>(Token som starter med `ey` er normalt av typen JWT token, for dem som synes dette var nyttig kunnskap. JWT token inneholder informasjon om brukeren, og kan leses i klartekst, f.eks. på jwt.io, men det en en avsporing i fra dette kurset. : )</i></p>
+    <p>Den lange responsen her (som starter med 'eyJhbG...') kalles et `token`, og fungerer som en tivolibillett. Den slipper deg inn på anlegget, og gir deg lov til å kjøre noen av karusellene, man kanskje ikke alle. </p><p>Kanskje får dere ulike farger på billettene avhengig av alder eller høyde. Hver billettkontrollør kan da lett sjekke om du får lov å kjøre karusellen uten å ringe billettselgeren for flere detaljer. </p><p><i>(Token som starter med `ey` er normalt av typen JWT token, for dem som synes dette var nyttig kunnskap. JWT token inneholder informasjon om brukeren, og kan leses i klartekst, f.eks. på jwt.io, men det en en avsporing i fra dette kurset. : )</i></p>
 </details><br>
 
 - Hent ut informasjon om brukeren med `/Login/CurrentUser`
