@@ -9,6 +9,7 @@ public interface IDatabaseService
     UserDTO? GetUserByUsername(string username);
     UserDTO? GetUserByNationalId(string nationalId);
     InvoiceDTO? GetInvoice(int id);
+    InvoiceDTO? GetInvoice(string filename);
     PrescriptionDTO? GetPrescription(int id);
     InvoiceDTO[] GetUserInvoices(int userid);
     PrescriptionDTO[] GetUserPrescriptions(int userid);

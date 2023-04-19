@@ -49,6 +49,16 @@ public class InvoiceController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetInvoicePDF(string filename)
     {
+        string authusername = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        UserDTO authuser = _dbservice.GetUserByUsername(authusername);
+    
+        InvoiceDTO invoice = _dbservice.GetInvoice(filename);
+        if (invoice == null || invoice.OwnerId != authuser.Id)
+        {
+            _logger.LogWarning("Unauthorized attempt. User '{User}' tried to fetch invoice '{invoice}'", authuser.Id, invoice.Id);  // Din loggmelding
+            return Unauthorized();  // Returner med statuskode 401
+        }
+    
         FileStream stream = _filestorage.GetFile(filename);
         if (stream == null)  // file does not exist
         {
@@ -57,7 +67,7 @@ public class InvoiceController : ControllerBase
         else  // file exists
         {
             string attachmentname = Path.GetFileName(stream.Name);
-            _logger.LogInformation("Downloaded: {Attachment}", attachmentname);
+            _logger.LogInformation("Invoice '{Attachment}' downloaded by user {User}", attachmentname, authuser.Id);
 
             // Respond to client
             Response.Headers.Add("Content-Disposition", $"attachment; filename=\"{attachmentname}\"");

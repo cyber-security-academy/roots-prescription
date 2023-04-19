@@ -142,6 +142,11 @@ public class DatabaseService : IDatabaseService
         }
     }
 
+    public InvoiceDTO? GetInvoice(string filename)
+    {
+        return _invoices.FirstOrDefault(x => x.Value.Filename == filename).Value;
+    }
+
     public PrescriptionDTO[]? GetUserPrescriptions(int userid)
     {
         UserDTO user = GetUserById(userid, true);
