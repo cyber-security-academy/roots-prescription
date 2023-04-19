@@ -8,4 +8,4 @@ Dere skal skrive ned 2-3 egne forslag til trusselscenarier. Disse skal dere ta m
 
 
 ### Neste oppgave
-Når dere har skrevet ferdig, kan dere se på selve [e-resept microservicen](./1_swagger.md)!
+Når dere har skrevet ferdig, kan dere se på selve [eResept-microservicen](./1_swagger.md)!
