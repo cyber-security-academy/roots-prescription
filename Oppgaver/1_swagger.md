@@ -1,12 +1,12 @@
 # Introduksjonsoppgave: Microservice for e-resept (5-10 minutter)
 
-Microservicen 'e-resept' er et REST API. Denne oppgaven handler om å teste hvordan APIet fungerer. 
+Microservicen "e-resept" er et REST API. Denne oppgaven handler om å teste hvordan APIet fungerer. 
 
 APIet er beregnet for maskiner, men noe som heter OpenAPI (tidligere "Swagger") lar et menneske lettere få oversikt og teste et REST API. Det skal vi bruke nå!
 
 ### 1) Lokaliser din gruppe sitt API
 - Gå til https://csa-gr[GRUPPENUMMER]-app.azurewebsites.net/swagger  *Husk å bytte ut `[GRUPPENUMMER]`, f.eks. `csa-gr9-app`*
-- User `System`-kontrolleren, kjør Execute på `/System/Ping`, og du bør motta en *respons* `-- CHANGE ME--`.
+- Gå til `System`-kontrolleren, kjør Execute på `/System/Ping`, og du bør motta en *respons* `-- CHANGE ME--`.
 
 ### 2) Logg på
 - Åpne `/Login/Login`, logg inn med en av:

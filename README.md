@@ -4,7 +4,7 @@ Velkommen til dag to av kurset. I dag tar dere rollen som utviklere!
 Applikasjonen dere ble presentert for på Dag 1 skal vi nå utvikle videre på.
 
 Først, la oss gå gjennom hva som har skjedd.
-Roots Apotek fikk en melding om at deres resepter var på avveie. Kilden var en av microservicene 'e-resept' for nedlasting av PDFer for resepter og faktura. De fant ut at det var mulig å for innloggede brukere å laste ned andres resepter gjennom URLen `/Prescription/GetPdf`. 
+Roots Apotek fikk en melding om at deres resepter var på avveie. Kilden var en av microservicene "e-resept" for nedlasting av PDFer for resepter og faktura. De fant ut at det var mulig å for innloggede brukere å laste ned andres resepter gjennom URLen `/Prescription/GetPdf`. 
 
 Årsaken til sårbarheten ble identifisert. Sårbarheten lå på i funksjonen [GetPdf](RootsPrescription/Controllers/PrescriptionController.cs#L51-L85) i controlleren `PrescriptionController.cs`. Hullet er nå tettet og dere kan anta at funksjonen er sikker.
 
