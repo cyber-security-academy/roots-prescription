@@ -1,4 +1,4 @@
-# Hovedoppgaven - Fiks loggmeldingene
+# Hovedoppgave: Fiks loggmeldingene
 
 ### Programmeringsoppgave (10-15 minutter)
 Hjelp! Personvernombudet i Roots Apotek har sagt at vi ikke kan logge persondata. 
@@ -17,3 +17,5 @@ Dette er et vanskelig tema og vi forventer ikke et riktig juridisk svar. Da må 
 
 ### Neste oppgave
 Når endringen er live i Splunk, kan dere gå videre til [neste oppgave](./5_hendelse.md).
+
+[Gå tilbake til forrige oppgave](./3_ping.md)

@@ -1,20 +1,11 @@
-# Roots Apotek - Microservice for e-resept (5-10 minutter)
+# Introduksjonsoppgave: Microservice for e-resept (5-10 minutter)
 
-Microservicen 'e-resept' er et REST API, dvs en samling en URLer beregnet for andre datamaskiner.
+Microservicen 'e-resept' er et REST API. Denne oppgaven handler om å teste hvordan APIet fungerer. 
 
-Denne oppgaven handler om å teste hvordan APIet fungerer. 
+APIet er beregnet for maskiner, men noe som heter OpenAPI (tidligere "Swagger") lar et menneske lettere få oversikt og teste et REST API. Det skal vi bruke nå!
 
-APIet er som sagt beregnet for maskiner, men noe som heter OpenAPI (tidligere "Swagger") lar et menneske lettere få oversikt og teste et REST API. Det skal vi gjøre nå!
-
-### URLen til APIet deres
-Hver gruppe har sitt eget API med egen URL. Under er URLen til applikasjonen deres, husk å bytte med deres gruppenummer. 
-
-**https://csa-gr[GRUPPENUMMER]-app.azurewebsites.net/** *Husk å bytte ut `[GRUPPENUMMER]`, f.eks. `csa-gr9-app`*
-
-> Hver gang vi refererer til APIet og en tekst som inneholder en slash (/), mener vi URLen deres med denne teksten bak. F.eks. `/Prescription/GetPdf` blir til "https://csa-gr9-app.azurewebsites.net/Prescription/GetPdf" for gruppe 9.
-
-### 1) Lokaliser ditt API
-- Gå til https://csa-gr[GRUPPENUMMER]-app.azurewebsites.net/swagger
+### 1) Lokaliser din gruppe sitt API
+- Gå til https://csa-gr[GRUPPENUMMER]-app.azurewebsites.net/swagger  *Husk å bytte ut `[GRUPPENUMMER]`, f.eks. `csa-gr9-app`*
 - User `System`-kontrolleren, kjør Execute på `/System/Ping`, og du bør motta en *respons* `-- CHANGE ME--`.
 
 ### 2) Logg på
@@ -46,3 +37,5 @@ Hver gruppe har sitt eget API med egen URL. Under er URLen til applikasjonen der
 
 ## Neste oppgave
 Når dere har lastet ned en PDF kan dere går videre til [neste oppgave](./2_les-logger-i-Splunk.md)!
+
+[Gå tilbake til forrige oppgave](./0_trusselmodellering.md)

@@ -1,4 +1,4 @@
-# Les logger i Splunk (10-15 minutter)
+# Introduksjonsoppgave: Les logger i Splunk (10-15 minutter)
 
 Vi har blitt ansatt til å rette opp i loggene. Da må vi først gjøre oss kjent med 
 logg-verktøyet som kunden bruker, Splunk.
@@ -30,6 +30,6 @@ For å slippe å trykke 'Søk' hele tiden for å se nye loggmeldinger, kan man e
 
 
 ### Neste oppgave
-Det er mye man kan filtrere på og sjekke i Splunk, men vi kan ikke bruke hele dagen på dette. 
+Det er mye man kan filtrere på og sjekke i Splunk, men vi kan ikke bruke hele dagen på dette. Du kan nå gå videre til neste oppgave, [første kodeendring](./3_ping.md)!
 
-Du kan nå gå videre til neste oppgave, [første kodeendring](./3_ping.md)!
+[Gå tilbake til forrige oppgave](./1_swagger.md)

@@ -1,4 +1,4 @@
-# Incident Response Team (IRT) tar kontakt!
+# Hovedoppgave: Incident Response Team (IRT) tar kontakt!
 
 <details>
 <summary>Incident Response Team (IRT) er...</summary>
@@ -103,3 +103,4 @@ Bruk litt tid på å oppsummere valgene dere har gjort. Disse presenteres på op
 ## Neste oppgave
 Neste oppgave er en [bonusoppgave](./6_fiks_s%C3%A5rbarheten.md)!
 
+[Gå tilbake til forrige oppgave](./4_fiks-loggmeldingen.md)
