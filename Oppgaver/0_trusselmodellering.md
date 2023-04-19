@@ -1,4 +1,4 @@
-# Trusselmodellering (15-20 minutter)
+# Trusselmodellering (maks 15 minutter)
 
 > I plenum varmet vi opp trusselmodellering-hjernen. Det kan være utfordrende for de som ikke tenker på sikkerhet hver dag, men å øve på dette er nyttig for å levere kvalitet!
 
