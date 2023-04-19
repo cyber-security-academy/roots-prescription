@@ -27,19 +27,19 @@ De har laget en mikroservice, *eResept*, som tilbyr resepter og fakturakopi til 
 Microservicen for resepter består av 3 *controllere* (Login, Prescriptions og Invoice) som tilbyr URLer, og 2 *servicer* (FileStorage og Database).
 
 ```mermaid
-graph RL;
-Login("<b><u>Login Controller</u></b><br/>/Login/Login<br/>/Login/CurrentUser")
+graph LR;
+Login("<b><u>Login</u></b><br/>/Login/Login<br/>/Login/CurrentUser")
 Invoice("<b><u>Invoice</u></b><br/>/Invoice/GetMyInvoices<br/>/Invoice/GetInvoicePDF")
 Prescription("<b><u>Prescription</u></b><br/>/Prescription/GetMyPrescriptions<br/>/Prescription/GetPDF")
 
 DB("Database Service")
-Login-->DB
-Invoice-->DB
-Prescription-->DB
+DB-->Login
+DB-->Invoice
+DB-->Prescription
 
 File("FileStorage Service")
-Invoice-->File
-Prescription-->File
+File-->Invoice
+File-->Prescription
 
 ```
 
