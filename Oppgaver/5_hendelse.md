@@ -5,7 +5,7 @@
 ... teamet som håndterer hendelser i organisasjonen. De har gjerne oversikt over alle systemer og deres logger. Blir et system angrepet, er det de som undersøker hva som har skjedd. 
 </details><br>
 
-Denne oppgaven kommer i 4 steg. Det er lurt å gjør stegene etter hverandre og deploye til prod mellom hver gang. Dette er en litt mer komplisert oppgave enn tidligere, ikke nøl med å spørre om hjelp!
+Denne oppgaven kommer i 4 steg. Det er lurt å gjøre stegene etter hverandre og deploye til prod mellom hver gang. Dette er en litt mer komplisert oppgave enn tidligere, ikke nøl med å spørre om hjelp!
 
 Har dere noen spørsmål eller vil diskutere noen unormale logger, skriv i Teams-kanalen til gruppen deres og tag IRT-teamet, Vegard BAKKE og Marit TOKLE.
 
