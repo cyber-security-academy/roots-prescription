@@ -29,7 +29,7 @@ public class SystemController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public ActionResult<string> Ping()
     {
-        const string message = "--CHANGE ME--";
+        const string message = "--Hello--";
         _logger.LogInformation(message);
 
         return message;
