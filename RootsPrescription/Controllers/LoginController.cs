@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using RootsPrescription.Database;
-using RootsPrescription.FileStorage;
 using RootsPrescription.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
@@ -58,13 +57,31 @@ public class LoginController : ControllerBase
     }
 
     [HttpGet]
+    [ApiExplorerSettings(IgnoreApi = true)]
+    public async Task<IActionResult> GetUser(int uid)
+    {
+        UserDTO? authuser = _dbservice.GetUserById(uid, true);
+
+        return Ok(authuser);
+    }
+
+    [HttpGet]
+    [ApiExplorerSettings(IgnoreApi = true)]  // FixMe: Is this still used by the front-end?
+    public async Task<IActionResult> Me()
+    {
+        Int32.TryParse(User.FindFirstValue(ClaimTypes.Upn), out int uid);
+
+        return GetUser(uid).Result;
+    }
+
+    [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<IActionResult> CurrentUser()
     {
         string authusername = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-        UserDTO authuser = _dbservice.GetUserByUsername(authusername);
+        UserDTO? authuser = _dbservice.GetUserByUsername(authusername);
 
         return Ok(authuser);
     }
@@ -117,6 +134,7 @@ public class LoginController : ControllerBase
     {
         List<Claim> claims = new()
         {
+            new Claim(ClaimTypes.Upn, user.Id.ToString()),
             new Claim(ClaimTypes.NameIdentifier, user.UserName),
             new Claim("FullName", user.Name),
             new Claim(ClaimTypes.Name, user.Name)
