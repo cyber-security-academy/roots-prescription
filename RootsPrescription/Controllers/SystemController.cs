@@ -35,5 +35,26 @@ public class SystemController : ControllerBase
         return message;
     }
 
+    [AllowAnonymous]
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public ActionResult<string> Mirror()
+    {
+        string message = "";
+
+        List<string> keys = (List<string>)Request.Headers.Keys;
+        keys.Sort();
+        foreach (string key in keys)
+        {
+            var values = Request.Headers[key]; 
+            message += $"{key}: {String.Join(" ", values)}\n";
+        }
+
+
+        _logger.LogInformation(message);
+
+        return message;
+    }
+
 
 }
