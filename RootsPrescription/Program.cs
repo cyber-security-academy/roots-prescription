@@ -16,6 +16,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IFileStorageService, FileStorageService>();
 builder.Services.AddScoped<IDatabaseService, DatabaseService>();
 builder.Services.AddHealthChecks();
@@ -60,6 +61,7 @@ Log.Logger = new LoggerConfiguration()
 // See configuration in appsettings.json
 builder.Host.UseSerilog((context, services, configuration) => configuration
     .ReadFrom.Configuration(context.Configuration)
+    .Enrich.WithClientIp()  // Serilog trusts X-Forwarded-For blindly
 );
 
 var app = builder.Build();
