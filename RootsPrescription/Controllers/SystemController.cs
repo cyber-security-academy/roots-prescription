@@ -8,6 +8,7 @@ using System.Text;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using SimpleHashing.Net;
+using System.Text.RegularExpressions;
 
 namespace RootsPrescription.Controllers;
 
@@ -42,12 +43,18 @@ public class SystemController : ControllerBase
     {
         string message = "";
 
+        List<string> __logheaders = new List<string> { "client-ip", "host", "host", "x-client-*", "x-forwarded-for", "x-vb*" };
+
         List<string> keys = (List<string>)Request.Headers.Keys;
         keys.Sort();
         foreach (string key in keys)
         {
-            var values = Request.Headers[key]; 
-            message += $"{key}: {String.Join(" ", values)}\n";
+
+            if (__logheaders.FindAll(x => Regex.IsMatch(key.ToLower(), x)).Count > 0)
+            {
+                var values = Request.Headers[key];
+                message += $"{key}: {String.Join(" ", values)}\n";
+            }
         }
 
 
