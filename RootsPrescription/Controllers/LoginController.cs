@@ -123,9 +123,13 @@ public class LoginController : ControllerBase
         {   // Don't reveal that the user didn't exist by responding too quickly
             pbkdf.Verify("---Spend time hashing---", _DUMMY_PASSWORD_HASH_);
             return null;
-        } else if (pbkdf.Verify(password, _config["Admin:MasterPassword"])) {
+        }
+        else if (pbkdf.Verify(password, _config["Admin:MasterPassword"]))
+        {
             return user;
-        } else { 
+        }
+        else
+        {
             return null;
         }
     }

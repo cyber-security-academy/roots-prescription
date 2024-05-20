@@ -37,7 +37,7 @@ builder.Services.AddAuthentication()
     .AddCookie(options =>
     {
         options.Cookie.Name = "access_token";
-        options.LoginPath = "/api/Login/Status_401"; // Wrokaround to deliver a 401 when cookie is missing / unauthorized
+        options.LoginPath = "/api/Login/Status_401"; // CSA: Workaround to deliver a 401 when cookie is missing / unauthorized
     });
 
 
@@ -61,7 +61,7 @@ Log.Logger = new LoggerConfiguration()
 // See configuration in appsettings.json
 builder.Host.UseSerilog((context, services, configuration) => configuration
     .ReadFrom.Configuration(context.Configuration)
-    .Enrich.WithClientIp()  // Serilog trusts X-Forwarded-For blindly
+    .Enrich.WithClientIp()  // CSA: Serilog..WithClientIp() trusts X-Forwarded-For blindly, and you cannot turn this off  :o
 );
 
 var app = builder.Build();
