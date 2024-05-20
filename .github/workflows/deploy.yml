@@ -51,6 +51,11 @@ jobs:
         app-settings-json: |
           [
               {
+                  "name": "Serilog__WriteTo__1__Args__configureLogger__WriteTo__0__Args__splunkHost",
+                  "value": "${{ vars.SPLUNK_URL }}",
+                  "slotSetting": false
+              },
+              {
                   "name": "Serilog__WriteTo__1__Args__configureLogger__WriteTo__0__Args__eventCollectorToken",
                   "value": "${{ vars.SPLUNK_TOKEN }}",
                   "slotSetting": false
