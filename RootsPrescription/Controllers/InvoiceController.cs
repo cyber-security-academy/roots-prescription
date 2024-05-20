@@ -45,7 +45,6 @@ public class InvoiceController : ControllerBase
     }
     
     [HttpGet]
-    [Authorize]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetInvoicePDF(string filename)
