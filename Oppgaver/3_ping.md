@@ -1,7 +1,7 @@
 # Introduksjonsoppgave: Ping! Noens første pull request?
 
 <details>
-<summary>En "pull request" er...</summary>
+<summary>En "pull request" er...  &nbsp; <i><span style="font-size:smaller">(trykk på pila for å se svaret)</span></i> </summary>
 ... en metode å be noen se over endringer i et prosjekt for å få det inn i produksjonsmiljøet. Dette kalles "code review" eller "kodegjennomgang", en av de viktigste aktivitetene i sikker utvikling.
 </details><br>
 
@@ -10,7 +10,7 @@ for å gjøre dere litt varme i trøya slik at dere kan det grunnleggende.
 
 ### 1) Endre svaret fra /System/Ping
 - Gå til filen [SystemController.cs](/RootsPrescription/Controllers/SystemController.cs#L32) i GitHub. 
-- Finn svarresponsen `--CHANGEME--`. Den skal dere endre til hva dere vil. Pass på å kun endre teksten mellom hermetegnene (`"`), ellers kan koden feile (det går helt fint om den feiler, men det tar litt lenger tid å løse oppgaven).
+- Finn svarresponsen `--CHANGE ME--`. Den skal dere endre til hva dere vil. Pass på å kun endre teksten mellom hermetegnene (`"`), ellers kan koden feile (det går helt fint om den feiler, men det tar litt lenger tid å løse oppgaven).
 
 ### 2) Commit endringen til GitHub
 - Nederst på siden, under "Commit changes", skriver dere en kort melding om hvilken endring som er gjort

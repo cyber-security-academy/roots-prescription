@@ -5,9 +5,9 @@
 ... teamet som håndterer hendelser i organisasjonen. De har gjerne oversikt over alle systemer og deres logger. Blir et system angrepet, er det de som undersøker hva som har skjedd. 
 </details><br>
 
-Denne oppgaven kommer i 4 steg. Det er lurt å gjøre stegene etter hverandre og deploye til prod mellom hver gang. Dette er en litt mer komplisert oppgave enn tidligere, ikke nøl med å spørre om hjelp!
+Denne oppgaven kommer i fire steg. Det er lurt å gjøre stegene etter hverandre og deploye til produksjon mellom hver gang. Dette er en litt mer komplisert oppgave enn tidligere, ikke nøl med å spørre om hjelp!
 
-Har dere noen spørsmål eller vil diskutere noen unormale logger, skriv i Teams-kanalen til gruppen deres og tag IRT-teamet, Vegard BAKKE og Marit TOKLE.
+Har dere noen spørsmål eller vil diskutere noen unormale logger, skriv i Teams-kanalen til gruppen deres og tag IRT-teamet, Vegard Bakke, Cato Førrisdahl, Randi Stensli eller Even Frøyen.
 
 ---
 
@@ -17,7 +17,7 @@ De ser at det er unormalt mange kall mot endepunktene for nedlasting av filer,
 men de forstår ikke hva som skjer fordi loggmeldingene er uklare!
 
 Dere får i oppgave å gjøre loggene mer tydelige slik at IRT-teamet får undersøkt hva som foregår.
-IRT ber dere rette opp i loggmeldingen ["Downloaded: {Attachment}"](/RootsPrescription/Controllers/InvoiceController.cs#L60) i filen InvoiceContoller.cs. De har ett krav. **De trenger å vite hvilken bruker som gjør kallet**.
+IRT ber dere rette opp i loggmeldingen ["Downloaded: {Attachment}"](/RootsPrescription/Controllers/InvoiceController.cs#L60) i filen InvoiceContoller.cs. **De trenger å vite hvilken bruker som gjør kallet**.
 
 Legg til endringene i produksjonsmiljøet. Fortsett på steg 2, men husk å sjekke loggene i Splunk når endringene er deployet til produksjonsmiljøet.
 
@@ -36,8 +36,8 @@ Dere kan også se på funksjonen over, `GetMyInvoices()` for inspirasjon. [Linje
 ---
 
 ### Steg 2: Prøver noen å hente en fil som ikke finnes? (15 minutter)
-Esra i utviklingsteamet spør IRT om de ikke burde logge forsøk på filer som ikke finnes. 
-IRT er _helt_ enig! De gir dere kravet å logge **forsøk på å laste ned filer som ikke finnes, og hvem som gjør kallet**.
+En i utviklingsteamet spør IRT om de ikke burde logge forsøk på filer som ikke finnes. 
+IRT er _helt_ enig! De gir dere kravet å logge **alle forsøk på å laste ned filer som ikke finnes, og hvem som gjør kallet**.
 Dette skjer i samme funksjon som i steg 1, GetInvoicePDF().
 
 Legg til endringene i produksjonsmiljøet. Sjekk loggene i Splunk. Når det er klart kan dere gå videre.

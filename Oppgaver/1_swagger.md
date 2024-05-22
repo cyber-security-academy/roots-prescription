@@ -10,7 +10,7 @@ Det skal vi bruke nå!
 
 ### 2) Logg på
 - Åpne `/Login/Login`, logg inn med en av:
-  - Brukere: `ada`, `bob`, `camilla`, `dilan` , `eira`
+  - Brukere: `ada`, `bob`, `camilla`, `dilan` , `eva`, `francoise`, `hans`, `ismail`, `jorge`
   - Passord: `Superhemmelig1337`  *(Likt for alle brukere)*
 - Hvis du klarte å logge på, vil du få en slik respons i Swagger:
 
@@ -21,9 +21,10 @@ Det skal vi bruke nå!
     <p>Den lange responsen her (som starter med 'eyJhbG...') kalles et `token`, og fungerer som en tivolibillett. Den slipper deg inn på anlegget, og gir deg lov til å kjøre noen av karusellene, man kanskje ikke alle. </p><p>Kanskje får dere ulike farger på billettene avhengig av alder eller høyde. Hver billettkontrollør kan da lett sjekke om du får lov å kjøre karusellen uten å ringe billettselgeren for flere detaljer. </p><p><i>(Token som starter med `ey` er normalt av typen JWT token, for dem som synes dette var nyttig kunnskap. JWT token inneholder informasjon om brukeren, og kan leses i klartekst, f.eks. på jwt.io, men det er en avsporing i fra dette kurset. : )</i></p>
 </details><br>
 
-- Hent ut informasjon om brukeren med `/Login/CurrentUser`
+- Hent ut informasjon om brukeren (deg selv) med `/Login/CurrentUser`
 
 ### 3) Last ned en resept
+På nettstedet *Mine Sider* til Roots Apotek kan en pålogget bruker laste ned resepter og fakturaer. Nettsidene snakker med *backend-APIet* for å hente informasjon, og PDFer fra Roots sine servere. Vi skal nå teste Roots' *backend-API*, og gjøre de samme stegene som nettsidene gjør normalt. 
 - Finn info om *dine* resepter i `/Prescription/GetMyPrescriptions`. Noter deg en av IDene.
 - Bruk IDen for å laste ned PDFen den via `/Prescription/GetPdf`. Legg inn IDen i `id`-feltet før du trykker "Execute". 
 - Hvis du klarte å laste ned en PDF vil du få følgende respons:
@@ -32,7 +33,8 @@ Det skal vi bruke nå!
 
 
 ### 4) Last ned en faktura
-- Som over, men her har visst utviklerne glemt noe. Man benytter fortsatt `filename` som parameter. Ikke en ID. 
+Nå gjør vi stegene som nettsiden gjør når vi henter faktura.
+- Som over. Men her har visst utviklerne glemt noe. Man benytter fortsatt `filename` som parameter. Ikke en ID. 
 - Se om du kan hente ned en av fakturaene til brukeren 
 
 ## Neste oppgave
