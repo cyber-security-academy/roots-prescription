@@ -67,7 +67,22 @@ builder.Host.UseSerilog((context, services, configuration) => configuration
 var app = builder.Build();
 
 string group = builder.Configuration["GroupName"];
-app.Logger.LogInformation("Hello world, {GroupName} connected!", group);  
+app.Logger.LogInformation("Hello world, {GroupName} connected!", group);
+
+app.Use(async (context, next) => {
+    await next.Invoke();
+
+    if (context.Request.Path != "/favicon.ico" && !context.Response.HasStarted)
+    {
+        if (context.Response.StatusCode == 404)
+        {
+            // TODO: app.Logger.LogWarning("404: Unknown URL attempted: {Method} {Path}", context.Request.Method, context.Request.Path);
+            await context.Response.WriteAsync("404 - Denne siden finnes ikke.");
+        }
+    }
+});
+
+
 
 app.UseSwagger();
 app.UseSwaggerUI(options => options.EnableTryItOutByDefault());
