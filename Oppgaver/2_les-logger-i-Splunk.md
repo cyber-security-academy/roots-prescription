@@ -19,14 +19,17 @@ Test disse søkene og lek dere litt i Splunk.
 * `index="group_N" Resept`
 * `index="group_N" Fakt*`
 
-### Oversikt
-Se "Fields" på venstre side, klikk på `MessageTemplate` og `RenderedMessage` for å se oversikt over antallet meldinger.
+
+### NB! Interesting fields
+Se "Interesting Fields" på venstre side, klikk på `MessageTemplate` og `RenderedMessage` for å se oversikt over antallet meldinger.
 * `MessageTemplate` viser en oversikt over *typer* loggmeldinger 
 * `RenderedMessage` viser loggnmeldinger med alle detaljene fylt ut
 
-### Real-time
-For å slippe å trykke 'Søk' hele tiden for å se nye loggmeldinger, kan man endre til real-time oppdatering til venstere for Søkeknappen.  \
-![image](https://user-images.githubusercontent.com/4437745/230628582-4c503ee0-f3df-4ca0-b5e3-8ffe92484ba3.png)
+Disse to feltene er nesten like, men ikke helt. Hvilke formål kan disse ulikhetene benyttes til?
+
+Er det andre felter som kan være av interesse? Hva med `Properties.ClientIp`? User?
+
+
 
 ### Avvikere
 For å identifisere avvik i loggene (tegn på unormal aktivitet), så kan man bruke Splunk for å finne *sjeldne verdier*.

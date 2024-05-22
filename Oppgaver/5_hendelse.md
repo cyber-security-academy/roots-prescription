@@ -11,40 +11,27 @@ Har dere noen spørsmål eller vil diskutere noen unormale logger, skriv i Teams
 
 ---
 
-### Steg 1: Hvem gjør kallet? (15 minutter)
+### Steg 1: Hva skjer??? (15 minutter)
 Incident Response Teamet (IRT) har tatt kontakt! 
+
 De ser at det er unormalt mange kall mot endepunktene for nedlasting av filer, 
-men de forstår ikke hva som skjer fordi loggmeldingene er uklare!
+men loggene til eResept er mangelfulle! De mistenkter at eResept ikke logger *404 - Not found*.
 
-Dere får i oppgave å gjøre loggene mer tydelige slik at IRT-teamet får undersøkt hva som foregår.
-IRT ber dere rette opp i loggmeldingen ["Downloaded: {Attachment}"](/RootsPrescription/Controllers/InvoiceController.cs#L60) i filen InvoiceContoller.cs. **De trenger å vite hvilken bruker som gjør kallet**.
 
-Legg til endringene i produksjonsmiljøet. Fortsett på steg 2, men husk å sjekke loggene i Splunk når endringene er deployet til produksjonsmiljøet.
-
-<details>
-<summary>Kodetips!💡</summary>
-For å hente ut brukeren i kode kan dere legge inn følgende snutt over loggmeldingen:
-
-```csharp
-string authusername = User.FindFirstValue(ClaimTypes.NameIdentifier);
-UserDTO authuser = _dbservice.GetUserByUsername(authusername);
-```
-
-Dere kan også se på funksjonen over, `GetMyInvoices()` for inspirasjon. [Linje 43](/RootsPrescription/Controllers/InvoiceController.cs#L43) viser hvordan dere kan logge et brukernavn.
-</details><br>
-
----
-
-### Steg 2: Prøver noen å hente en fil som ikke finnes? (15 minutter)
-En i utviklingsteamet spør IRT om de ikke burde logge forsøk på filer som ikke finnes. 
-IRT er _helt_ enig! De gir dere kravet å logge **alle forsøk på å laste ned filer som ikke finnes, og hvem som gjør kallet**.
-Dette skjer i samme funksjon som i steg 1, GetInvoicePDF().
+Dere får i oppgave å logge alle forsøk som feiler, slik at IRT-teamet får undersøkt hva som foregår.
 
 Legg til endringene i produksjonsmiljøet. Sjekk loggene i Splunk. Når det er klart kan dere gå videre.
 
 <details>
+<summary>Et lite hint!💡</summary>
+Prøv dere fram om dere klarer å fremprovosere noen 404-meldinger. Finnes det mer enn én type?
+</details><br>
+
+<details>
 <summary>Kodetips!💡</summary>
-Første del av if-setningen under viser når filen ikke finnes. Inne i den blokken må dere logge hvem som gjør kallet som i steg 1. 
+Metoden `GetInvoicePdf()` returnerer 404 Not found hvis en PDF det spørres etter ikke finnes. 
+
+Første del av if-setningen under viser når filen ikke finnes. Inne i den blokken må dere logge hvilken URL som noen forsøker. Ser `PrescriptionController.cs` om dere er i tvil.
 
 ```csharp
 if (stream == null)  // file does not exist
@@ -68,10 +55,12 @@ else  // file exists
 
 ---
 
-### Steg 3: Er det en uautorisert bruker som gjør kallet? (15 minutter)
-Dere ser unormal aktivitet i loggene! Å nei! 
-Det er på tide at dere tar kontakt med IRT og forteller hva dere har sett! 
-(Skriv i Teams-kanalen deres og tag Vegard og Marit). 
+### Steg 2: Hva skjer i loggene? (15 minutter)
+Ser dere unormal aktivitet i loggene? Å nei! 
+Det er på tide at dere tar kontakt med IRT og forteller hva dere har sett!  Hva slags type angrep er Root Apotek utsatt for?
+
+(Skriv i Teams-kanalen deres og tag noen fra IRT-teamet). 
+
 I tillegg til svaret dere fikk, har dere fått et nytt krav. 
 Kravet er å logge **forsøk på kall av brukere som ikke er autorisert til å gjøre kallet** i samme funksjon som i steg 1, GetInvoicePDF().
 
@@ -92,6 +81,25 @@ if (invoice == null || invoice.OwnerId != authuser.Id)
 }
 ```
 
+</details><br>
+
+---
+
+### Steg 3: Hvem gjør kallet? (15 minutter)
+IRT ber dere rette opp i loggmeldingen ["Downloaded: {Attachment}"](/RootsPrescription/Controllers/InvoiceController.cs#L60) i filen InvoiceContoller.cs. **De trenger å vite hvilken bruker som gjør kallet**.
+
+Legg til endringene i produksjonsmiljøet. Fortsett på steg 2, men husk å sjekke loggene i Splunk når endringene er deployet til produksjonsmiljøet.
+
+<details>
+<summary>Kodetips!💡</summary>
+For å hente ut brukeren i kode kan dere legge inn følgende snutt over loggmeldingen:
+
+```csharp
+string authusername = User.FindFirstValue(ClaimTypes.NameIdentifier);
+UserDTO authuser = _dbservice.GetUserByUsername(authusername);
+```
+
+Dere kan også se på funksjonen over, `GetMyInvoices()` for inspirasjon. [Linje 43](/RootsPrescription/Controllers/InvoiceController.cs#L43) viser hvordan dere kan logge et brukernavn.
 </details><br>
 
 ---
