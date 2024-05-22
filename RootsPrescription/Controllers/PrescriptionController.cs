@@ -62,7 +62,8 @@ public class PrescriptionController : ControllerBase
         PrescriptionDTO prescription = _dbservice.GetPrescription(id);
         if (prescription == null || prescription.OwnerId != authuser.Id)
         {
-            _logger.LogWarning($"Unauthorized attempt by user {authuser.UserName} of fetching prescription id #{id}");
+            string docExists = (prescription == null) ? "non-exist" : "existing";
+            _logger.LogWarning("Unauthorized attempt by user {authUserName} of fetching ({docExists}) prescription id #{id}", authuser?.UserName, docExists, id);
             return Unauthorized();
         }
 
