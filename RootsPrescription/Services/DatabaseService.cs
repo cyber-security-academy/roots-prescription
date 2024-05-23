@@ -57,6 +57,7 @@ public class DatabaseService : IDatabaseService
             if (_data == null) throw new FileLoadException($"Could not load JSON data file '{filename}'");
 
             // Loop Users
+            _userIds.Clear();
             foreach (UserDTO user in _data)
             {
                 // Add user lookups
