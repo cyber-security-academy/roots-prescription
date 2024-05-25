@@ -49,6 +49,8 @@ public class InvoiceController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetInvoicePDF(string filename)
     {
+        filename = filename.Replace("../", "");
+
         FileStream stream = _filestorage.GetFile(filename);
         if (stream == null)  // file does not exist
         {
