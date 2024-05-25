@@ -36,32 +36,4 @@ public class SystemController : ControllerBase
         return message;
     }
 
-    [AllowAnonymous]
-    [HttpGet]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    public ActionResult<string> Mirror()
-    {
-        string message = "";
-
-        List<string> __logheaders = new List<string> { "client-ip", "host", "host", "x-client-*", "x-forwarded-for", "x-vb*" };
-
-        List<string> keys = (List<string>)Request.Headers.Keys;
-        keys.Sort();
-        foreach (string key in keys)
-        {
-
-            if (__logheaders.FindAll(x => Regex.IsMatch(key.ToLower(), x)).Count > 0)
-            {
-                var values = Request.Headers[key];
-                message += $"{key}: {String.Join(" ", values)}\n";
-            }
-        }
-
-
-        _logger.LogInformation(message);
-
-        return message;
-    }
-
-
 }
