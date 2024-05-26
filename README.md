@@ -68,14 +68,13 @@ Invoice("<b><u>Invoice</u></b><br/>/Invoice/GetMyInvoices<br/>/Invoice/GetInvoic
 Prescription("<b><u>Prescription</u></b><br/>/Prescription/GetMyPrescriptions<br/>/Prescription/GetPDF")
 
 DB("Database Service")
-DB-->Login
-DB-->Invoice
-DB-->Prescription
+Login-->DB
+Invoice-->DB
+Prescription-->DB
 
 File("FileStorage Service")
-File-->Invoice
-File-->Prescription
-
+Invoice-->File
+Prescription-->File
 ```
 
 # Ordbok
