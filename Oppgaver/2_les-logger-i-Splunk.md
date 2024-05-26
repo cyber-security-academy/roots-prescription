@@ -5,7 +5,7 @@ logg-verktøyet som kunden bruker, Splunk.
 
 La oss starte med å lese loggene til applikasjonen vår. 
 
-1. Gå til https://splunk.ca2.datasnok.no/en-GB/
+1. Gå til https://splunk.csa.datasnok.no/en-GB/
 2. Logg inn med brukernavn `groupN` og passord `unloving backspace mooing puma`. Bytt `N` med gruppenummeret dere fikk utdelt.
 3. Trykk på "Search & Reporting" på venstre side, et grønt ikon
 4. Skriv `index="group_N"` i søkefeltet. Bytt `N` med gruppenummeret dere har fått utdelt.
