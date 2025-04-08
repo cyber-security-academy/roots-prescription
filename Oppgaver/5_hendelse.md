@@ -93,7 +93,7 @@ if (invoice == null || invoice.OwnerId != authuser.Id)
 ---
 
 ### Steg 3: Hvem henter hva? (15 minutter)
-Om dere ikke allerede har gjort det, ber IRT dere inkluderfe brukerinfo i loggmeldingen ["Downloaded: {Attachment}"](/RootsPrescription/Controllers/InvoiceController.cs#L60) i filen InvoiceContoller.cs. **De trenger å vite hvilken bruker som gjør kallet**.
+Om dere ikke allerede har gjort det, så ber IRT dere om å inkludere brukerinfo i loggmeldingen ["Downloaded: {Attachment}"](/RootsPrescription/Controllers/InvoiceController.cs#L60) i filen InvoiceContoller.cs. **De trenger å vite hvilken bruker som gjør kallet**.
 
 
 <details>
