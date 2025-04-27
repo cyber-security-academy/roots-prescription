@@ -57,7 +57,7 @@ public class LoginController : ControllerBase
     }
 
     [HttpGet]
-    [ApiExplorerSettings(IgnoreApi = true)]
+    [ApiExplorerSettings(IgnoreApi = true)]  // FixMe: Is this still used by the mobile app?
     public async Task<IActionResult> GetUser(int uid)
     {
         UserDTO? authuser = _dbservice.GetUserById(uid, true);
@@ -66,7 +66,6 @@ public class LoginController : ControllerBase
     }
 
     [HttpGet]
-    [ApiExplorerSettings(IgnoreApi = true)]  // FixMe: Is this still used by the front-end?
     public async Task<IActionResult> Me()
     {
         Int32.TryParse(User.FindFirstValue(ClaimTypes.Upn), out int uid);
