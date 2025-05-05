@@ -1,8 +1,8 @@
 # Bonusoppgave!
 
-Trafikk fom gir `404 Not found` er ofte en indikasjon på at noen scanner etter sårbarheter. 
+Trafikk som gir `404 Not found` er ofte en indikasjon på at noen scanner etter sårbarheter. 
 
-Sjekk om eResept logger forsøk på sider som ikke finnes, (f.eks. URLen `/Finnes/Ikke`). 
+Sjekk om eResept logger forsøk på sider som ikke finnes (f.eks. URLen `/Finnes/Ikke`). 
 
 
 <details>
