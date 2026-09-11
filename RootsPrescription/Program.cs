@@ -92,6 +92,9 @@ app.UseSwaggerUI(options => options.EnableTryItOutByDefault());
 
 app.UseHttpsRedirection();
 
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
 app.UseAuthentication();
 app.UseAuthorization();
 

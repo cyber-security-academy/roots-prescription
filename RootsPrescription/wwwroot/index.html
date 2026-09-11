@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Roots Apotek | Mine Dokumenter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="bg-shape bg-shape-a"></div>
+    <div class="bg-shape bg-shape-b"></div>
+
+    <header class="hero">
+        <div>
+            <p class="eyebrow">ROOTS APOTEK</p>
+            <h1>Mine resepter og fakturaer</h1>
+            <p class="lead">Trygg tilgang til dokumentene dine med rask oversikt over status, resepter og fakturagrunnlag.</p>
+        </div>
+        <button id="resetButton" class="ghost-button" type="button">Nullstill visning</button>
+    </header>
+
+    <main class="layout">
+        <section class="panel card login-panel">
+            <h2>Logg inn</h2>
+            <form id="loginForm" class="form-grid">
+                <label for="username">Brukernavn</label>
+                <input id="username" name="username" autocomplete="username" required>
+
+                <label for="password">Passord</label>
+                <input id="password" name="password" type="password" autocomplete="current-password" required>
+
+                <button type="submit" class="primary-button">Logg inn</button>
+            </form>
+            <p class="hint">Innlogging setter cookie i nettleseren. Frontenden sender den automatisk med videre kall.</p>
+            <pre id="loginStatus" class="status"></pre>
+        </section>
+
+        <section class="panel card system-panel">
+            <div class="panel-head">
+                <h2>Systemstatus</h2>
+                <button id="pingButton" class="secondary-button" type="button">Kjor ping</button>
+            </div>
+            <div class="status-grid">
+                <article class="mini-card">
+                    <h3>Ping</h3>
+                    <p id="pingResult">Ikke kjort ennå</p>
+                </article>
+                <article class="mini-card">
+                    <h3>Aktiv bruker</h3>
+                    <pre id="currentUser" class="compact-output">Ikke hentet</pre>
+                </article>
+            </div>
+            <div class="panel-head">
+                <h3>JWT fra innlogging</h3>
+                <button id="copyTokenButton" class="ghost-button" type="button">Kopier</button>
+            </div>
+            <textarea id="jwtToken" readonly placeholder="Token vises her etter innlogging"></textarea>
+        </section>
+
+        <section class="panel card">
+            <div class="panel-head">
+                <h2>Mine resepter</h2>
+                <button id="refreshPrescriptionsButton" class="secondary-button" type="button">Oppdater</button>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Dokumentnr</th>
+                            <th>Dato</th>
+                            <th>Medisin</th>
+                            <th>Handling</th>
+                        </tr>
+                    </thead>
+                    <tbody id="prescriptionsBody">
+                        <tr><td colspan="5">Ingen data lastet</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="panel card">
+            <div class="panel-head">
+                <h2>Mine fakturaer</h2>
+                <button id="refreshInvoicesButton" class="secondary-button" type="button">Oppdater</button>
+            </div>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Fakturanr</th>
+                            <th>Fakturadato</th>
+                            <th>Forfall</th>
+                            <th>Handling</th>
+                        </tr>
+                    </thead>
+                    <tbody id="invoicesBody">
+                        <tr><td colspan="5">Ingen data lastet</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <template id="actionButtonTemplate">
+        <button class="table-button" type="button"></button>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>
