@@ -5,6 +5,16 @@ Skyløsninger er kult det. Men hver gang vi tar fram dette prosjektet må det ti
 
 Her er en oppskrift over det jeg gjorde i 2025. Håper det kan være nytte i 2026.
 
+## Upgrade process 2026
+
+1) Oppgrader prosjektet fra .Net 8.0 til .Net 10.0:
+  - Endre `TargetFramework` i `RootsPrescription.csproj` til `net10.0`
+2) Oppdater `Dockerfile` til samme .NET-versjon:
+  - `mcr.microsoft.com/dotnet/aspnet:10.0 AS base`
+  - `mcr.microsoft.com/dotnet/sdk:10.0 AS build`
+3) Oppdater NuGet-avhengigheter ved behov:
+  - Sjekk spesielt Microsoft-pakker som er bundet til rammeversjon
+
 ## Upgrade process 2025
 
 1) Kjørte .Net 6.0, som var på tide å oppgradere til siste Long-Term-Support .Net versjon:
