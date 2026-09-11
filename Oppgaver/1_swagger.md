@@ -10,7 +10,7 @@ Det skal vi bruke nå!
 
 ### 2) Logg på
 - Åpne `/Login/Login`, logg inn med en av:
-  - Brukere: `ada`, `bob`, `camilla`, `dilan` , `eva`, `francoise`, `hans`, `ismail`, `jorge`
+  - Brukere: `ada`, `bob`, `camilla`, `dilan`, `eva`, `hans`, `ismail`
   - Passord: `Superhemmelig1337`  *(Likt for alle brukere)*
 - Hvis du klarte å logge på, vil du få en slik respons i Swagger:
 

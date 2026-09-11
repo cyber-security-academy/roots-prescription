@@ -8,21 +8,21 @@ En av Roots Apotek sine kunder meldte ifra at de klarte å hente ut andre kunder
 
 
 ```mermaid
-graph LR;
+flowchart LR
 
-bruker("Kunde");
-mobilapp("Mobilapp <br/> Roots - Mitt apotek");
-minesider("Nettside<br/> Roots - Mine sider");
-eresept("eResept<br/>microservice");
-proxy("Azure Gateway<br/><i>'brannmur'</i>");
-splunk("Splunk<br/>Loggverktøy");
+bruker("Kunde")
+mobilapp("Mobilapp <br/> Roots - Mitt apotek")
+minesider("Nettside<br/> Roots - Mine sider")
+eresept("eResept<br/>microservice")
+proxy("Azure Gateway<br/><i>'brannmur'</i>")
+splunk("Splunk<br/>Loggverktøy")
+database[(Database)]
+pdfStore[PDF-store]
 
-
-bruker-->mobilapp-->proxy-->eresept-->Database;
-bruker-->minesider-->proxy;
-eresept-->PDF-store;
-eresept-->splunk;
-
+bruker --> mobilapp --> proxy --> eresept --> database
+bruker --> minesider --> proxy
+eresept --> pdfStore
+eresept --> splunk
 ```
 
 eResept ligger bak en webapplikasjon-brannmur (*Azure Gateway*), og den sender alle sine logger til et verktøy som heter *Splunk*.
@@ -62,19 +62,19 @@ De har laget en mikroservice, *eResept*, som tilbyr resepter og fakturakopi til 
 Microservicen for resepter består av 3 *controllere* (Login, Prescriptions og Invoice) som tilbyr URLer, og 2 *servicer* (FileStorage og Database).
 
 ```mermaid
-graph LR;
+flowchart LR
 Login("<b><u>Login</u></b><br/>/Login/Login<br/>/Login/CurrentUser")
 Invoice("<b><u>Invoice</u></b><br/>/Invoice/GetMyInvoices<br/>/Invoice/GetInvoicePDF")
 Prescription("<b><u>Prescription</u></b><br/>/Prescription/GetMyPrescriptions<br/>/Prescription/GetPDF")
 
 DB("Database Service")
-Login-->DB
-Invoice-->DB
-Prescription-->DB
+Login --> DB
+Invoice --> DB
+Prescription --> DB
 
 File("FileStorage Service")
-Invoice-->File
-Prescription-->File
+Invoice --> File
+Prescription --> File
 ```
 
 # Ordbok
