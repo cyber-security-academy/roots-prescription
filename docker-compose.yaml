@@ -1,0 +1,12 @@
+services:
+  roots-prescription:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: roots-prescription
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:80
+    ports:
+      - "5123:80"
+    restart: unless-stopped
