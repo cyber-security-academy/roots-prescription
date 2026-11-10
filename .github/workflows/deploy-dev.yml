@@ -49,27 +49,16 @@ jobs:
         echo "$IMAGE_AND_TAG" >> $GITHUB_STEP_SUMMARY
 
     - name: Set Splunk token for HTTP Event Collector
-      uses: Azure/appservice-settings@v1
-      with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        app-settings-json: |
-          [
-              {
-                  "name": "Serilog__WriteTo__1__Args__configureLogger__WriteTo__0__Args__splunkHost",
-                  "value": "${{ vars.SPLUNK_URL }}",
-                  "slotSetting": false
-              },
-              {
-                  "name": "Serilog__WriteTo__1__Args__configureLogger__WriteTo__0__Args__eventCollectorToken",
-                  "value": "${{ secrets.SPLUNK_TOKEN }}",
-                  "slotSetting": false
-              },
-              {
-                  "name": "GroupName",
-                  "value": "Dev",
-                  "slotSetting": false
-              }
-          ]
+      env:
+        SPLUNK_URL: ${{ vars.SPLUNK_URL }}
+        SPLUNK_TOKEN: ${{ secrets.SPLUNK_TOKEN }}
+      run: |
+        RESOURCE_GROUP=$(az webapp list --query "[?name=='$AZURE_WEBAPP_NAME'].resourceGroup" -o tsv)
+        # --output none: az prints all app settings, including the token
+        az webapp config appsettings set --name $AZURE_WEBAPP_NAME --resource-group $RESOURCE_GROUP --output none --settings \
+          "Serilog__WriteTo__1__Args__configureLogger__WriteTo__0__Args__splunkHost=$SPLUNK_URL" \
+          "Serilog__WriteTo__1__Args__configureLogger__WriteTo__0__Args__eventCollectorToken=$SPLUNK_TOKEN" \
+          "GroupName=Dev"
 
     - name: Deploy to Azure Web App for Container
       uses: azure/webapps-deploy@v3
