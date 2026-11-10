@@ -18,6 +18,8 @@ env:
   
 jobs:
   build-and-deploy:
+    # The template repo deploys from develop (deploy-dev.yml); this runs in the group repos
+    if: github.repository != 'cyber-security-academy/roots-prescription'
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository

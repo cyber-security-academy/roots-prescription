@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     # Azure trusts repo:cyber-security-academy/roots-prescription:environment:dev,
     # and the environment only allows the develop branch
+    if: github.repository == 'cyber-security-academy/roots-prescription'
     environment: dev
     steps:
     - name: Checkout repository
